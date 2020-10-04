@@ -13,5 +13,8 @@
     "BSV"
   ],
   "author": "Aleksandar Dinkov",
-  "license": "SEE LICENSE IN LICENSE.MD"
+  "license": "SEE LICENSE IN LICENSE.MD",
+  "devDependencies": {
+    "yaml": "^1.10.0"
+  }
 }
