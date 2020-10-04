@@ -1,5 +1,3 @@
-/** Code copied from FAKENET */
-
 var exec = require("child_process").exec;
 
 var myExec = (command, log = false, o = {}) => {
