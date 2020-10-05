@@ -9,17 +9,26 @@ const gitRepo = `https://github.com/tokenized/${repoName}.git`;
 generate();
 
 async function generate() {
-  var data = await loadData();
-  await generateCode(data);
+  await cloneRepo();
+  // var data = await loadData();
+  await generateCode();
   console.log("DONE!");
 }
 
-async function loadData() {
+async function cloneRepo() {
   if (fs.existsSync(`./${repoName}`))
     fs.rmdirSync(`./${repoName}`, { recursive: true });
-
   await exec("git clone " + gitRepo);
+}
 
+async function generateCode() {
+  exec("gopherjs build ./generate/generateJS.go", true, {
+    GOPATH: __dirname,
+    GOPHERJS_GOROOT: __dirname,
+  });
+}
+
+async function loadData() {
   var folders = fs.readdirSync(`./${repoName}/src`);
   var parsedYaml = {};
   for (let i = 0; i < folders.length; i++) {
@@ -29,10 +38,6 @@ async function loadData() {
   }
   fs.writeFileSync("./data.json", JSON.stringify(parsedYaml, null, 2));
   return parsedYaml;
-}
-
-async function generateCode(data) {
-  throw new Error("Not Implemented");
 }
 
 function parseYamlRecursively(currentPath) {
