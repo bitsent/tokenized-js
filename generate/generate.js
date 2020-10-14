@@ -22,7 +22,7 @@ async function cloneRepo() {
 }
 
 async function generateCode() {
-  exec("gopherjs build ./generate/generateJS.go", true, {
+  exec("gopherjs build ./generate/generateJS.go -o ./index.js", true, {
     GOPATH: __dirname,
     GOPHERJS_GOROOT: __dirname,
   });

@@ -7,16 +7,13 @@ package main
 // Use "go generate" to build this.
 
 import (
-	"crypto/sha256"
 	"github.com/gopherjs/gopherjs/js"
 )
 
 func main() {
-	js.Module.Get("exports").Set("hashit", hashit)
+	js.Module.Get("exports").Set("_concat_2_strings_", _concat_2_strings_)
 }
 
-func hashit(s string) []byte {
-	h := sha256.New()
-	h.Write([]byte(s))
-	return h.Sum(nil)
+func _concat_2_strings_(s1 string, s2 string) string {
+	return s1 + s2;
 }
