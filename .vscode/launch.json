@@ -9,13 +9,12 @@
       "request": "launch",
       "name": "Launch Program",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}\\generate\\generate.js"
+      "program": "${workspaceFolder}/generate/generate.js"
     },
-
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch File",
+      "name": "Node: Launch File",
       "skipFiles": ["<node_internals>/**"],
       "program": "${file}"
     }
