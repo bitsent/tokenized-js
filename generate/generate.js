@@ -228,49 +228,12 @@ function reportUnknownTypes(unknownTypes) {
 /**
  * each class has:
  * - fieldNames[]
- * - set_<fieldName>
- * - get_<fieldName>
- * - validate_<fieldName>
+ * - set <fieldName>
+ * - get <fieldName>
  * - validate()
  */
 async function generateType(type, typeLocations, baseDir) {
-  var fields = type.node.fields || [];
-  for (let i = 0; i < fields.length; i++) {
-    var f = fields[i];
-    f.originalType = f.type;
-
-    f.isDeprecated = f.originalType === "deprecated";
-
-    f.isArray = f.originalType.endsWith("[]");
-    f.arrayType = f.isArray
-      ? f.originalType.substr(0, f.originalType.length - 2)
-      : null;
-    if (f.isArray) f.originalType = f.arrayType;
-
-    f.isTokenizedArrayType = f.isArray && typeLocations[f.arrayType];
-    f.isBasicArrayType = f.isArray && basicTypes[f.arrayType];
-
-    f.isTokenizedType = !!typeLocations[f.originalType];
-    f.isBasic = !!basicTypes[f.originalType];
-
-    f.acceptedType = f.type;
-    if (f.isBasic && !f.isArray) {
-      f.type = basicTypes[f.originalType].getTypeName(f);
-      f.acceptedType = basicTypes[f.originalType].acceptedType;
-    } else if (f.isBasic && f.isArray) {
-      f.acceptedType = basicTypes[f.originalType].acceptedType + "[]";
-      f.arrayType = basicTypes[f.originalType].getTypeName(f);
-      f.type = f.arrayType + "[]";
-    }
-
-    f.importType = f.arrayType || f.type;
-
-    f.isKnown = f.isBasic || f.isTokenizedType || f.isDeprecated;
-
-    if (!f.isKnown) unknownTypes.push(f.importType);
-  }
-
-  fields = fields.filter((f) => !f.isDeprecated);
+  var fields = parseFields(type, typeLocations);
 
   var pathUpToRoot = "." + type.path.map((i) => "/..").join("");
 
@@ -318,6 +281,8 @@ class ${type.name} extends BaseType {
     super.validateAllFields();
   }
 
+  ${fields.map((f) => `private _${f.name}: ${f.type};`).join("\n  ")}
+
   ${fields.map(generateFieldCode).join("\n")}
 }
 
@@ -326,10 +291,48 @@ export default ${type.name};`;
   fs.writeFileSync(path.join(baseDir, ...type.path, type.name + ".ts"), code);
 }
 
+function parseFields(type, typeLocations) {
+  var fields = type.node.fields || [];
+  for (let i = 0; i < fields.length; i++) {
+    var f = fields[i];
+    f.originalType = f.type;
+
+    f.isDeprecated = f.originalType === "deprecated";
+
+    f.isArray = f.originalType.endsWith("[]");
+    f.arrayType = f.isArray
+      ? f.originalType.substr(0, f.originalType.length - 2)
+      : null;
+    if (f.isArray) f.originalType = f.arrayType;
+
+    f.isTokenizedArrayType = f.isArray && typeLocations[f.arrayType];
+    f.isBasicArrayType = f.isArray && basicTypes[f.arrayType];
+
+    f.isTokenizedType = !!typeLocations[f.originalType];
+    f.isBasic = !!basicTypes[f.originalType];
+
+    f.acceptedType = f.type;
+    if (f.isBasic && !f.isArray) {
+      f.type = basicTypes[f.originalType].getTypeName(f);
+      f.acceptedType = basicTypes[f.originalType].acceptedType;
+    } else if (f.isBasic && f.isArray) {
+      f.acceptedType = basicTypes[f.originalType].acceptedType + "[]";
+      f.arrayType = basicTypes[f.originalType].getTypeName(f);
+      f.type = f.arrayType + "[]";
+    }
+
+    f.importType = f.arrayType || f.type;
+
+    f.isKnown = f.isBasic || f.isTokenizedType || f.isDeprecated;
+
+    if (!f.isKnown) unknownTypes.push(f.importType);
+  }
+
+  fields = fields.filter((f) => !f.isDeprecated);
+  return fields;
+}
+
 function generateFieldCode(f) {
-  var seperatorComment = `/** ## ${f.label.toUpperCase()} */`;
-  var fieldDef = `
-  private _${f.name}: ${f.type};`;
   var comment = `
   /**
    * ### ${f.label} 
@@ -354,7 +357,7 @@ function generateFieldCode(f) {
 
   return (
     "\n" +
-    [seperatorComment, fieldDef, comment, setter, comment, getter]
+    [comment, setter, comment, getter]
       .join("\n")
       .split("\n")
       .filter((i) => i.trim())
@@ -368,7 +371,8 @@ function valueValidationCode(f) {
 }
 
 function valueGeterCode(f) {
-  if (f.isArray && f.isTokenizedType) return `return this._${f.name};`;
+  if (f.isArray && f.isTokenizedType)
+    return `return this._${f.name}.map(i => i);`;
   else if (f.isArray && f.isBasic)
     return `return this._${f.name}.map(i => i.value);`;
   else if (!f.isArray && f.isTokenizedType) return `return this._${f.name};`;
