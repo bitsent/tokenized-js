@@ -46,7 +46,6 @@ export class UInt extends BaseType {
 export class UInt8 extends UInt { public bitsize = 8; }
 export class UInt16 extends UInt { public bitsize = 16; }
 export class UInt32 extends UInt { public bitsize = 32; }
-export class uint extends UInt {}
 export class UInt64 extends UInt { public bitsize = 64; }
 
 export class FixedChar extends BaseType {
@@ -95,6 +94,7 @@ export class VarBin extends BaseType {
     }
 }
 
+export class VarBin_tiny extends VarBin { public bytesize = 9999999999999999999999; } // TODO: Find the real number
 export class VarBin_small extends VarBin { public bytesize = 9999999999999999999999; } // TODO: Find the real number
 export class VarBin_medium extends VarBin { public bytesize = 9999999999999999999999; } // TODO: Find the real number
 
@@ -111,3 +111,22 @@ export class Bin extends BaseType {
 }
 
 export class Bin32 extends Bin { public bytesize = 32; }
+export class Bin33 extends Bin { public bytesize = 33; }
+
+export class Role extends UInt8 { constructor(value: number) { super(value); }  }
+export class EntityType extends FixedChar1 { constructor(value: string) { super(value); }  }
+export class Polity extends FixedChar3 { constructor(value: string) { super(value); }  }
+export class RejectionCode extends UInt8 { constructor(value: number) { super(value); }  }
+export class Tag extends UInt8 { constructor(value: number) { super(value); }  }
+export class Address extends VarBin_small { constructor(value: Uint8Array) { super(value); }  }
+export class ContractCode extends Bin32 { constructor(value: Uint8Array) { super(value); }  }
+export class AssetType extends FixedChar3 { constructor(value: string) { super(value); }  }
+export class AssetCode extends Bin32 { constructor(value: Uint8Array) { super(value); }  }
+export class Timestamp extends UInt64 { constructor(value: number) { super(value); }  }
+export class TxId extends Bin32 { constructor(value: Uint8Array) { super(value); }  }
+export class PublicKey extends Bin33 { constructor(value: Uint8Array) { super(value); }  }
+export class Signature extends VarBin_tiny { constructor(value: Uint8Array) { super(value); }  }
+
+export class ProofOfIdentityType extends UInt8 { constructor(value: number) { super(value); }  }
+
+export class CurrencyType extends FixedChar3 { constructor(value: string) { super(value); }  }

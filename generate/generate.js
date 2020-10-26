@@ -165,6 +165,32 @@ var basicTypes = {
     getTypeName: (f) => "FixedChar" + (f.size ? f.size : ""),
     acceptedType: "string",
   },
+
+  /** ALIASES */
+  Role: { getTypeName: (f) => "Role", acceptedType: "number" },
+  EntityType: { getTypeName: (f) => "EntityType", acceptedType: "string" },
+  Polity: { getTypeName: (f) => "Polity", acceptedType: "string" },
+  RejectionCode: {
+    getTypeName: (f) => "RejectionCode",
+    acceptedType: "number",
+  },
+  Tag: { getTypeName: (f) => "Tag", acceptedType: "number" },
+  Address: { getTypeName: (f) => "Address", acceptedType: "Uint8Array" },
+  ContractCode: {
+    getTypeName: (f) => "ContractCode",
+    acceptedType: "Uint8Array",
+  },
+  AssetType: { getTypeName: (f) => "AssetType", acceptedType: "string" },
+  AssetCode: { getTypeName: (f) => "AssetCode", acceptedType: "Uint8Array" },
+  Timestamp: { getTypeName: (f) => "Timestamp", acceptedType: "number" },
+  TxId: { getTypeName: (f) => "TxId", acceptedType: "Uint8Array" },
+  PublicKey: { getTypeName: (f) => "PublicKey", acceptedType: "Uint8Array" },
+  Signature: { getTypeName: (f) => "Signature", acceptedType: "Uint8Array" },
+  ProofOfIdentityType: {
+    getTypeName: (f) => "ProofOfIdentityType",
+    acceptedType: "number",
+  },
+  CurrencyType: { getTypeName: (f) => "CurrencyType", acceptedType: "string" },
 };
 
 var unknownTypes = [];
@@ -210,41 +236,38 @@ function reportUnknownTypes(unknownTypes) {
 async function generateType(type, typeLocations, baseDir) {
   var fields = type.node.fields || [];
   for (let i = 0; i < fields.length; i++) {
-    var fName = fields[i].type;
+    var f = fields[i];
+    f.originalType = f.type;
 
-    fields[i].isDeprecated = fName === "deprecated";
+    f.isDeprecated = f.originalType === "deprecated";
 
-    fields[i].isArray = fName.endsWith("[]");
-    fields[i].arrayType = fields[i].isArray
-      ? fName.substr(0, fName.length - 2)
+    f.isArray = f.originalType.endsWith("[]");
+    f.arrayType = f.isArray
+      ? f.originalType.substr(0, f.originalType.length - 2)
       : null;
-    fields[i].isTokenizedArrayType =
-      fields[i].isArray && typeLocations[fields[i].arrayType];
-    fields[i].isBasicArrayType =
-      fields[i].isArray && basicTypes[fields[i].arrayType];
+    if (f.isArray) f.originalType = f.arrayType;
 
-    fields[i].isTokenizedType =
-      !!typeLocations[fName] || !!typeLocations[fields[i].arrayType];
-    fields[i].isBasic =
-      !!basicTypes[fName] || !!basicTypes[fields[i].arrayType];
+    f.isTokenizedArrayType = f.isArray && typeLocations[f.arrayType];
+    f.isBasicArrayType = f.isArray && basicTypes[f.arrayType];
 
-    fields[i].acceptedType = fields[i].type;
-    if (fields[i].isBasic && !fields[i].isArray) {
-      fields[i].type = basicTypes[fName].getTypeName(fields[i]);
-      fields[i].acceptedType = basicTypes[fName].acceptedType;
-    } else if (fields[i].isBasic && fields[i].isArray) {
-      fields[i].type =
-        basicTypes[fields[i].arrayType].getTypeName(fields[i]) + "[]";
-      fields[i].acceptedType =
-        basicTypes[fields[i].arrayType].acceptedType + "[]";
+    f.isTokenizedType = !!typeLocations[f.originalType];
+    f.isBasic = !!basicTypes[f.originalType];
+
+    f.acceptedType = f.type;
+    if (f.isBasic && !f.isArray) {
+      f.type = basicTypes[f.originalType].getTypeName(f);
+      f.acceptedType = basicTypes[f.originalType].acceptedType;
+    } else if (f.isBasic && f.isArray) {
+      f.acceptedType = basicTypes[f.originalType].acceptedType + "[]";
+      f.arrayType = basicTypes[f.originalType].getTypeName(f);
+      f.type = f.arrayType + "[]";
     }
 
-    fields[i].importType = fields[i].arrayType || fields[i].type;
+    f.importType = f.arrayType || f.type;
 
-    fields[i].isKnown =
-      fields[i].isBasic || fields[i].isTokenizedType || fields[i].isDeprecated;
+    f.isKnown = f.isBasic || f.isTokenizedType || f.isDeprecated;
 
-    if (!fields[i].isKnown) unknownTypes.push(fields[i].importType);
+    if (!f.isKnown) unknownTypes.push(f.importType);
   }
 
   fields = fields.filter((f) => !f.isDeprecated);
@@ -271,7 +294,7 @@ import BaseType${baseImports} from "${pathUpToRoot}/Base";
 ${tokenizedImports}
 
 /**
- * ### ${type.node.label} ###
+ * # ${type.node.label}
  * ${type.node.description}
  */
 class ${type.name} extends BaseType {
@@ -304,11 +327,12 @@ export default ${type.name};`;
 }
 
 function generateFieldCode(f) {
+  var seperatorComment = `/** ## ${f.label.toUpperCase()} */`;
   var fieldDef = `
   private _${f.name}: ${f.type};`;
   var comment = `
   /**
-   * # ${f.label} #
+   * ### ${f.label} 
    * ${f.description}
    */
   `;
@@ -330,7 +354,7 @@ function generateFieldCode(f) {
 
   return (
     "\n" +
-    [fieldDef, comment, setter, getter]
+    [seperatorComment, fieldDef, comment, setter, comment, getter]
       .join("\n")
       .split("\n")
       .filter((i) => i.trim())
