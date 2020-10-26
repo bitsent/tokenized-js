@@ -1,9 +1,9 @@
 
-import BaseType, { UInt32 } from "./../../Base";
+import BaseType, { TxId, UInt32 } from "./../../Base";
 
 
 /**
- * ### Outpoint ###
+ * # Outpoint
  * Reference to a bitcoin transaction output.
  */
 class Outpoint extends BaseType {
@@ -19,28 +19,38 @@ class Outpoint extends BaseType {
   }
 
   
+/** ## TXID */
   private _TxId: TxId;
   /**
-   * # TxId #
+   * ### TxId 
    * undefined
    */
-  public set TxId(val: TxId) {
-    this._TxId = val;
+  public set TxId(val: Uint8Array) {
+    this._TxId = new TxId(val);
     this._TxId.validate();
   }
-  public get TxId() : TxId {
-    // TODO: implement this unsupported scenario
+  /**
+   * ### TxId 
+   * undefined
+   */
+  public get TxId() : Uint8Array {
+    return this._TxId.value;
   }
 
+/** ## OUTPUT INDEX */
   private _OutputIndex: UInt32;
   /**
-   * # Output Index #
+   * ### Output Index 
    * The index of the output within the referenced transaction.
    */
   public set OutputIndex(val: number) {
     this._OutputIndex = new UInt32(val);
     this._OutputIndex.validate();
   }
+  /**
+   * ### Output Index 
+   * The index of the output within the referenced transaction.
+   */
   public get OutputIndex() : number {
     return this._OutputIndex.value;
   }

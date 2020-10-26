@@ -3,7 +3,7 @@ import BaseType from "./../Base";
 
 
 /**
- * ### undefined ###
+ * # undefined
  * Code/Text combinations returned in rejection messages when a request is not accepted.
  */
 class Rejections extends BaseType {

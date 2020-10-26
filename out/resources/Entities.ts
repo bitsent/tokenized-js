@@ -3,7 +3,7 @@ import BaseType from "./../Base";
 
 
 /**
- * ### undefined ###
+ * # undefined
  * Legal Entities & Ownership Structures. 1 character.
  */
 class Entities extends BaseType {

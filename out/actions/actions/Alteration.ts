@@ -1,9 +1,9 @@
 
-import BaseType, { VarChar_medium } from "./../../Base";
+import BaseType, { TxId, VarChar_medium } from "./../../Base";
 
 
 /**
- * ### Alteration ###
+ * # Alteration
  * A register entry/record can be altered.
  */
 class Alteration extends BaseType {
@@ -19,28 +19,38 @@ class Alteration extends BaseType {
   }
 
   
+/** ## ENTRY TX ID */
   private _EntryTxID: TxId;
   /**
-   * # Entry Tx ID #
+   * ### Entry Tx ID 
    * Transaction ID of the register entry to be altered.
    */
-  public set EntryTxID(val: TxId) {
-    this._EntryTxID = val;
+  public set EntryTxID(val: Uint8Array) {
+    this._EntryTxID = new TxId(val);
     this._EntryTxID.validate();
   }
-  public get EntryTxID() : TxId {
-    // TODO: implement this unsupported scenario
+  /**
+   * ### Entry Tx ID 
+   * Transaction ID of the register entry to be altered.
+   */
+  public get EntryTxID() : Uint8Array {
+    return this._EntryTxID.value;
   }
 
+/** ## MESSAGE */
   private _Message: VarChar_medium;
   /**
-   * # Message #
+   * ### Message 
    * A custom message to include with this action.
    */
   public set Message(val: string) {
     this._Message = new VarChar_medium(val);
     this._Message.validate();
   }
+  /**
+   * ### Message 
+   * A custom message to include with this action.
+   */
   public get Message() : string {
     return this._Message.value;
   }

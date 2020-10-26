@@ -1,9 +1,9 @@
 
-import BaseType from "./../../Base";
+import BaseType, { Address, Timestamp } from "./../../Base";
 
 
 /**
- * ### Contract Address Change ###
+ * # Contract Address Change
  * This txn is signed by the master contract key defined in the contract formation and changes the active contract address which the contract uses to receive and respond to requests. This is a worst case scenario fallback to only be used when the contract private key is believed to be exposed.
  */
 class ContractAddressChange extends BaseType {
@@ -19,30 +19,40 @@ class ContractAddressChange extends BaseType {
   }
 
   
+/** ## NEW CONTRACT ADDRESS */
   private _NewContractAddress: Address;
   /**
-   * # New Contract Address #
+   * ### New Contract Address 
    * The address to be used by all future requests/responses for the contract.
    */
-  public set NewContractAddress(val: Address) {
-    this._NewContractAddress = val;
+  public set NewContractAddress(val: Uint8Array) {
+    this._NewContractAddress = new Address(val);
     this._NewContractAddress.validate();
   }
-  public get NewContractAddress() : Address {
-    // TODO: implement this unsupported scenario
+  /**
+   * ### New Contract Address 
+   * The address to be used by all future requests/responses for the contract.
+   */
+  public get NewContractAddress() : Uint8Array {
+    return this._NewContractAddress.value;
   }
 
+/** ## TIMESTAMP */
   private _Timestamp: Timestamp;
   /**
-   * # Timestamp #
+   * ### Timestamp 
    * Timestamp in nanoseconds of when the action was created.
    */
-  public set Timestamp(val: Timestamp) {
-    this._Timestamp = val;
+  public set Timestamp(val: number) {
+    this._Timestamp = new Timestamp(val);
     this._Timestamp.validate();
   }
-  public get Timestamp() : Timestamp {
-    // TODO: implement this unsupported scenario
+  /**
+   * ### Timestamp 
+   * Timestamp in nanoseconds of when the action was created.
+   */
+  public get Timestamp() : number {
+    return this._Timestamp.value;
   }
 }
 

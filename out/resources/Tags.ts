@@ -3,7 +3,7 @@ import BaseType from "./../Base";
 
 
 /**
- * ### undefined ###
+ * # undefined
  * Predefined tags for output metadata. Multiple values can be assigned to an output to describe a tx output.
 
  */

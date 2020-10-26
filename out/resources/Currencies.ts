@@ -3,7 +3,7 @@ import BaseType from "./../Base";
 
 
 /**
- * ### undefined ###
+ * # undefined
  * International Organization for Standardization code for Currency. 3 character code.
  */
 class Currencies extends BaseType {

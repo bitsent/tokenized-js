@@ -1,9 +1,9 @@
 
-import BaseType from "./../../Base";
+import BaseType, { Timestamp } from "./../../Base";
 
 
 /**
- * ### Period ###
+ * # Period
  * A period of time. Begin and end can be optional depending on context.
  */
 class Period extends BaseType {
@@ -19,30 +19,40 @@ class Period extends BaseType {
   }
 
   
+/** ## BEGIN */
   private _Begin: Timestamp;
   /**
-   * # Begin #
+   * ### Begin 
    * The start of the period
    */
-  public set Begin(val: Timestamp) {
-    this._Begin = val;
+  public set Begin(val: number) {
+    this._Begin = new Timestamp(val);
     this._Begin.validate();
   }
-  public get Begin() : Timestamp {
-    // TODO: implement this unsupported scenario
+  /**
+   * ### Begin 
+   * The start of the period
+   */
+  public get Begin() : number {
+    return this._Begin.value;
   }
 
+/** ## END */
   private _End: Timestamp;
   /**
-   * # End #
+   * ### End 
    * The end of the period
    */
-  public set End(val: Timestamp) {
-    this._End = val;
+  public set End(val: number) {
+    this._End = new Timestamp(val);
     this._End.validate();
   }
-  public get End() : Timestamp {
-    // TODO: implement this unsupported scenario
+  /**
+   * ### End 
+   * The end of the period
+   */
+  public get End() : number {
+    return this._End.value;
   }
 }
 

@@ -3,7 +3,7 @@ import BaseType from "./../../Base";
 
 
 /**
- * ### undefined ###
+ * # undefined
  * undefined
  */
 class Contract extends BaseType {

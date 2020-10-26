@@ -3,7 +3,7 @@ import BaseType, { VarChar_medium } from "./../../Base";
 
 
 /**
- * ### Addition ###
+ * # Addition
  * Adds an entry to the Register.
  */
 class Addition extends BaseType {
@@ -19,15 +19,20 @@ class Addition extends BaseType {
   }
 
   
+/** ## MESSAGE */
   private _Message: VarChar_medium;
   /**
-   * # Message #
+   * ### Message 
    * A custom message to include with this action.
    */
   public set Message(val: string) {
     this._Message = new VarChar_medium(val);
     this._Message.validate();
   }
+  /**
+   * ### Message 
+   * A custom message to include with this action.
+   */
   public get Message() : string {
     return this._Message.value;
   }

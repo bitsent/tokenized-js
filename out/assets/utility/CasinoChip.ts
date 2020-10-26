@@ -1,9 +1,9 @@
 
-import BaseType, { FixedChar1, UInt64 } from "./../../Base";
+import BaseType, { CurrencyType, FixedChar1, Timestamp, UInt64 } from "./../../Base";
 import AgeRestriction from "./../../assets/types/AgeRestriction";
 
 /**
- * ### Casino Chip ###
+ * # Casino Chip
  * Casino Chip
  */
 class CasinoChip extends BaseType {
@@ -19,80 +19,110 @@ class CasinoChip extends BaseType {
   }
 
   
+/** ## CURRENCY CODE */
   private _CurrencyCode: CurrencyType;
   /**
-   * # Currency Code #
+   * ### Currency Code 
    * International Organization for Standardization code for Currency. (Specification/Resources)
    */
-  public set CurrencyCode(val: CurrencyType) {
-    this._CurrencyCode = val;
+  public set CurrencyCode(val: string) {
+    this._CurrencyCode = new CurrencyType(val);
     this._CurrencyCode.validate();
   }
-  public get CurrencyCode() : CurrencyType {
-    // TODO: implement this unsupported scenario
+  /**
+   * ### Currency Code 
+   * International Organization for Standardization code for Currency. (Specification/Resources)
+   */
+  public get CurrencyCode() : string {
+    return this._CurrencyCode.value;
   }
 
+/** ## USE TYPE */
   private _UseType: FixedChar1;
   /**
-   * # Use Type #
+   * ### Use Type 
    * Real Money (R), Social (S), Free Play (F)
    */
   public set UseType(val: string) {
     this._UseType = new FixedChar1(val);
     this._UseType.validate();
   }
+  /**
+   * ### Use Type 
+   * Real Money (R), Social (S), Free Play (F)
+   */
   public get UseType() : string {
     return this._UseType.value;
   }
 
+/** ## AGE RESTRICTION */
   private _AgeRestriction: AgeRestriction;
   /**
-   * # Age Restriction #
+   * ### Age Restriction 
    * Age restriction is used to specify required ages for asset ownership.
    */
   public set AgeRestriction(val: AgeRestriction) {
     this._AgeRestriction = val;
     this._AgeRestriction.validate();
   }
+  /**
+   * ### Age Restriction 
+   * Age restriction is used to specify required ages for asset ownership.
+   */
   public get AgeRestriction() : AgeRestriction {
     return this._AgeRestriction;
   }
 
+/** ## VALID FROM */
   private _ValidFrom: Timestamp;
   /**
-   * # Valid From #
+   * ### Valid From 
    * undefined
    */
-  public set ValidFrom(val: Timestamp) {
-    this._ValidFrom = val;
+  public set ValidFrom(val: number) {
+    this._ValidFrom = new Timestamp(val);
     this._ValidFrom.validate();
   }
-  public get ValidFrom() : Timestamp {
-    // TODO: implement this unsupported scenario
-  }
-
-  private _ExpirationTimestamp: Timestamp;
   /**
-   * # Expiration Timestamp #
+   * ### Valid From 
    * undefined
    */
-  public set ExpirationTimestamp(val: Timestamp) {
-    this._ExpirationTimestamp = val;
-    this._ExpirationTimestamp.validate();
-  }
-  public get ExpirationTimestamp() : Timestamp {
-    // TODO: implement this unsupported scenario
+  public get ValidFrom() : number {
+    return this._ValidFrom.value;
   }
 
+/** ## EXPIRATION TIMESTAMP */
+  private _ExpirationTimestamp: Timestamp;
+  /**
+   * ### Expiration Timestamp 
+   * undefined
+   */
+  public set ExpirationTimestamp(val: number) {
+    this._ExpirationTimestamp = new Timestamp(val);
+    this._ExpirationTimestamp.validate();
+  }
+  /**
+   * ### Expiration Timestamp 
+   * undefined
+   */
+  public get ExpirationTimestamp() : number {
+    return this._ExpirationTimestamp.value;
+  }
+
+/** ## PRECISION */
   private _Precision: UInt64;
   /**
-   * # Precision #
+   * ### Precision 
    * Required field to specify the decimal precision of a currency. It will normally be the "precision" value associated with the CurrencyCode. It is the number of decimal places between the number of tokens and the common unit of measure. For example, in AUD, the common unit is the dollar, but a token would only be worth a penny. So the precision should be 2 for the two decimal places in a dollar amount "$1.00". In this scenario 100 tokens are worth $1.
    */
   public set Precision(val: number) {
     this._Precision = new UInt64(val);
     this._Precision.validate();
   }
+  /**
+   * ### Precision 
+   * Required field to specify the decimal precision of a currency. It will normally be the "precision" value associated with the CurrencyCode. It is the number of decimal places between the number of tokens and the common unit of measure. For example, in AUD, the common unit is the dollar, but a token would only be worth a penny. So the precision should be 2 for the two decimal places in a dollar amount "$1.00". In this scenario 100 tokens are worth $1.
+   */
   public get Precision() : number {
     return this._Precision.value;
   }

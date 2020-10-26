@@ -3,7 +3,7 @@ import BaseType, { UInt16, UInt64 } from "./../../Base";
 
 
 /**
- * ### Quantity Index ###
+ * # Quantity Index
  * A QuantityIndex contains a quantity, and an index. The quantity could be used to describe a number of tokens, or a value. The index is used to refer to an input or output index position.
  */
 class QuantityIndex extends BaseType {
@@ -19,28 +19,38 @@ class QuantityIndex extends BaseType {
   }
 
   
+/** ## INDEX */
   private _Index: UInt16;
   /**
-   * # Index #
+   * ### Index 
    * The index of the input/output (depending on context) sending/receiving the tokens.
    */
   public set Index(val: number) {
     this._Index = new UInt16(val);
     this._Index.validate();
   }
+  /**
+   * ### Index 
+   * The index of the input/output (depending on context) sending/receiving the tokens.
+   */
   public get Index() : number {
     return this._Index.value;
   }
 
+/** ## QUANTITY */
   private _Quantity: UInt64;
   /**
-   * # Quantity #
+   * ### Quantity 
    * Number of tokens being sent
    */
   public set Quantity(val: number) {
     this._Quantity = new UInt64(val);
     this._Quantity.validate();
   }
+  /**
+   * ### Quantity 
+   * Number of tokens being sent
+   */
   public get Quantity() : number {
     return this._Quantity.value;
   }
