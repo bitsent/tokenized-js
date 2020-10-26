@@ -19,6 +19,8 @@ class Contract extends BaseType {
   }
 
   
+
+  
 }
 
 export default Contract;

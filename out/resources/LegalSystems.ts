@@ -20,6 +20,8 @@ class LegalSystems extends BaseType {
   }
 
   
+
+  
 }
 
 export default LegalSystems;

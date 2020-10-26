@@ -18,9 +18,10 @@ class SignatureRequest extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## TIMESTAMP */
   private _Timestamp: Timestamp;
+  private _Payload: VarBin_medium;
+
+  
   /**
    * ### Timestamp 
    * Timestamp in nanoseconds for when the message sender creates the transaction.
@@ -37,8 +38,6 @@ class SignatureRequest extends BaseType {
     return this._Timestamp.value;
   }
 
-/** ## PAYLOAD */
-  private _Payload: VarBin_medium;
   /**
    * ### Payload 
    * Full serialized bitcoin tx with multiple inputs from different wallets/users.

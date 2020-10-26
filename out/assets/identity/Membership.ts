@@ -18,9 +18,16 @@ class Membership extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## AGE RESTRICTION */
   private _AgeRestriction: AgeRestriction;
+  private _ValidFrom: Timestamp;
+  private _ExpirationTimestamp: Timestamp;
+  private _ID: VarChar;
+  private _MembershipClass: VarChar;
+  private _RoleType: VarChar;
+  private _MembershipType: VarChar;
+  private _Description: VarChar_small;
+
+  
   /**
    * ### Age Restriction 
    * Age restriction is used to specify required ages for asset ownership.
@@ -37,8 +44,6 @@ class Membership extends BaseType {
     return this._AgeRestriction;
   }
 
-/** ## VALID FROM */
-  private _ValidFrom: Timestamp;
   /**
    * ### Valid From 
    * undefined
@@ -55,8 +60,6 @@ class Membership extends BaseType {
     return this._ValidFrom.value;
   }
 
-/** ## EXPIRATION TIMESTAMP */
-  private _ExpirationTimestamp: Timestamp;
   /**
    * ### Expiration Timestamp 
    * undefined
@@ -73,8 +76,6 @@ class Membership extends BaseType {
     return this._ExpirationTimestamp.value;
   }
 
-/** ## ID */
-  private _ID: VarChar;
   /**
    * ### ID 
    * undefined
@@ -91,8 +92,6 @@ class Membership extends BaseType {
     return this._ID.value;
   }
 
-/** ## MEMBERSHIP CLASS */
-  private _MembershipClass: VarChar;
   /**
    * ### Membership Class 
    * undefined
@@ -109,8 +108,6 @@ class Membership extends BaseType {
     return this._MembershipClass.value;
   }
 
-/** ## ROLE TYPE */
-  private _RoleType: VarChar;
   /**
    * ### Role Type 
    * undefined
@@ -127,8 +124,6 @@ class Membership extends BaseType {
     return this._RoleType.value;
   }
 
-/** ## MEMBERSHIP TYPE */
-  private _MembershipType: VarChar;
   /**
    * ### Membership Type 
    * undefined
@@ -145,8 +140,6 @@ class Membership extends BaseType {
     return this._MembershipType.value;
   }
 
-/** ## DESCRIPTION */
-  private _Description: VarChar_small;
   /**
    * ### Description 
    * undefined

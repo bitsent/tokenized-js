@@ -19,6 +19,8 @@ class Polities extends BaseType {
   }
 
   
+
+  
 }
 
 export default Polities;

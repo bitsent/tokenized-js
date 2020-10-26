@@ -19,6 +19,8 @@ class Entities extends BaseType {
   }
 
   
+
+  
 }
 
 export default Entities;

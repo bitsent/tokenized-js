@@ -19,6 +19,8 @@ class Ticket extends BaseType {
   }
 
   
+
+  
 }
 
 export default Ticket;

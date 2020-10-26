@@ -19,9 +19,12 @@ class Message extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## SENDER INDEXES */
   private _SenderIndexes: UInt32[];
+  private _ReceiverIndexes: UInt32[];
+  private _MessageCode: UInt16;
+  private _MessagePayload: VarBin_medium;
+
+  
   /**
    * ### Sender Indexes 
    * Associates the message to a particular input by the index. If none are specified then the first input is assumed.
@@ -38,8 +41,6 @@ class Message extends BaseType {
     return this._SenderIndexes.map(i => i.value);
   }
 
-/** ## RECEIVER INDEXES */
-  private _ReceiverIndexes: UInt32[];
   /**
    * ### Receiver Indexes 
    * Associates the message to a particular output by the index. If none are specified then the first output is assumed.
@@ -56,8 +57,6 @@ class Message extends BaseType {
     return this._ReceiverIndexes.map(i => i.value);
   }
 
-/** ## MESSAGE CODE */
-  private _MessageCode: UInt16;
   /**
    * ### Message Code 
    * undefined
@@ -74,8 +73,6 @@ class Message extends BaseType {
     return this._MessageCode.value;
   }
 
-/** ## MESSAGE PAYLOAD */
-  private _MessagePayload: VarBin_medium;
   /**
    * ### Message Payload 
    * Public or private (RSA public key, Diffie-Hellman). Issuers/Contracts can send the signifying amount of satoshis to themselves for public announcements or private 'notes' if encrypted. See Message Types for a full list of potential use cases.

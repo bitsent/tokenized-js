@@ -18,9 +18,10 @@ class AcceptRelationship extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## PROOF OF IDENTITY TYPE */
   private _ProofOfIdentityType: ProofOfIdentityType;
+  private _ProofOfIdentity: VarBin;
+
+  
   /**
    * ### Proof of Identity Type 
    * The type/format of the sender's proof of identity.
@@ -37,8 +38,6 @@ class AcceptRelationship extends BaseType {
     return this._ProofOfIdentityType.value;
   }
 
-/** ## PROOF OF IDENTITY */
-  private _ProofOfIdentity: VarBin;
   /**
    * ### Proof of Identity 
    * Sender's proof of identity.

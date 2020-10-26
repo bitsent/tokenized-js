@@ -18,9 +18,11 @@ class Amendment extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## FIELD INDEX PATH */
   private _FieldIndexPath: VarBin;
+  private _Operation: UInt8;
+  private _Data: VarBin_medium;
+
+  
   /**
    * ### Field Index Path 
    * List of indices that identify the field/sub-field to be amended.
@@ -37,8 +39,6 @@ class Amendment extends BaseType {
     return this._FieldIndexPath.value;
   }
 
-/** ## OPERATION */
-  private _Operation: UInt8;
   /**
    * ### Operation 
    * 0 = Modify. 1 = Add an element to the data to the array of elements. 2 = Delete the element listed in the Element field. The Add and Delete operations only apply to a particilar element of a complex array type. For example, it could be used to remove a particular VotingSystem from a Contract.
@@ -55,8 +55,6 @@ class Amendment extends BaseType {
     return this._Operation.value;
   }
 
-/** ## DATA */
-  private _Data: VarBin_medium;
   /**
    * ### Data 
    * New data for the amended subfield. Data type depends on the the type of the field being amended. The value should be serialize as defined by the protocol.

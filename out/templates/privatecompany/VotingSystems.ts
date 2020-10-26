@@ -19,6 +19,8 @@ class VotingSystems extends BaseType {
   }
 
   
+
+  
 }
 
 export default VotingSystems;

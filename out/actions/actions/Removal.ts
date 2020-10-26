@@ -18,9 +18,10 @@ class Removal extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## ENTRY TX ID */
   private _EntryTxID: TxId;
+  private _Message: VarChar_medium;
+
+  
   /**
    * ### Entry Tx ID 
    * Transaction ID of the register entry to be altered.
@@ -37,8 +38,6 @@ class Removal extends BaseType {
     return this._EntryTxID.value;
   }
 
-/** ## MESSAGE */
-  private _Message: VarChar_medium;
   /**
    * ### Message 
    * A custom message to include with this action.

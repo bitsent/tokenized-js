@@ -19,6 +19,8 @@ class CommonShare extends BaseType {
   }
 
   
+
+  
 }
 
 export default CommonShare;

@@ -20,6 +20,8 @@ class Tags extends BaseType {
   }
 
   
+
+  
 }
 
 export default Tags;

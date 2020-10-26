@@ -18,9 +18,11 @@ class Currency extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## CURRENCY CODE */
   private _CurrencyCode: CurrencyType;
+  private _MonetaryAuthority: VarChar;
+  private _Precision: UInt64;
+
+  
   /**
    * ### Currency Code 
    * International Organization for Standardization code for Currency. (Specification/Resources)
@@ -37,8 +39,6 @@ class Currency extends BaseType {
     return this._CurrencyCode.value;
   }
 
-/** ## MONETARY AUTHORITY */
-  private _MonetaryAuthority: VarChar;
   /**
    * ### Monetary Authority 
    * undefined
@@ -55,8 +55,6 @@ class Currency extends BaseType {
     return this._MonetaryAuthority.value;
   }
 
-/** ## PRECISION */
-  private _Precision: UInt64;
   /**
    * ### Precision 
    * Required field to specify the decimal precision of a currency. It will normally be the "precision" value associated with the CurrencyCode. It is the number of decimal places between the number of tokens and the common unit of measure. For example, in AUD, the common unit is the dollar, but a token would only be worth a penny. So the precision should be 2 for the two decimal places in a dollar amount "$1.00". In this scenario 100 tokens are worth $1.

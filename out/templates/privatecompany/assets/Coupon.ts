@@ -19,6 +19,8 @@ class Coupon extends BaseType {
   }
 
   
+
+  
 }
 
 export default Coupon;

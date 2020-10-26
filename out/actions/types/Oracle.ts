@@ -18,9 +18,10 @@ class Oracle extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## ORACLE TYPES */
   private _OracleTypes: UInt8[];
+  private _EntityContract: Address;
+
+  
   /**
    * ### Oracle Types 
    * The type of the oracle. 0 = Identity, 1 = Authority, 2 = Event. More than one value can be included to specify the oracle has more than one type.
@@ -37,8 +38,6 @@ class Oracle extends BaseType {
     return this._OracleTypes.map(i => i.value);
   }
 
-/** ## ENTITY CONTRACT */
-  private _EntityContract: Address;
   /**
    * ### Entity Contract 
    * The entity contract address of the service on chain that defines the oracle.

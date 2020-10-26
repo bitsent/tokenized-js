@@ -19,9 +19,24 @@ class Entity extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## NAME */
   private _Name: VarChar_tiny;
+  private _Type: EntityType;
+  private _LEI: FixedChar20;
+  private _UnitNumber: VarChar;
+  private _BuildingNumber: VarChar_tiny;
+  private _Street: VarChar_tiny;
+  private _SuburbCity: VarChar_tiny;
+  private _TerritoryStateProvinceCode: FixedChar5;
+  private _CountryCode: FixedChar3;
+  private _PostalZIPCode: FixedChar12;
+  private _EmailAddress: VarChar_tiny;
+  private _PhoneNumber: VarChar_tiny;
+  private _Administration: Administrator[];
+  private _Management: Manager[];
+  private _DomainName: VarChar_tiny;
+  private _PaymailHandle: VarChar_tiny;
+
+  
   /**
    * ### Name 
    * Length 1-255 bytes (0 is not valid). Issuing entity (company, organization, individual).  Can be any unique identifying string, including human readable names for branding/vanity purposes. 
@@ -38,8 +53,6 @@ class Entity extends BaseType {
     return this._Name.value;
   }
 
-/** ## TYPE */
-  private _Type: EntityType;
   /**
    * ### Type 
    * The type of entity. (i.e Public Company, Individual) (Specification/Resources).
@@ -56,8 +69,6 @@ class Entity extends BaseType {
     return this._Type.value;
   }
 
-/** ## LEGAL ENTITY IDENTIFIER */
-  private _LEI: FixedChar20;
   /**
    * ### Legal Entity Identifier 
    * Null is valid. A Legal Entity Identifier (or LEI) is an international identifier made up of a 20-character identifier that identifies distinct legal entities that engage in financial transactions. It is defined by ISO 17442.[1] Natural persons are not required to have an LEI; they’re eligible to have one issued, however, but only if they act in an independent business capacity.[2] The LEI is a global standard, designed to be non-proprietary data that is freely accessible to all.[3] As of December 2018, over 1,300,000 legal entities from more than 200 countries have now been issued with LEIs.
@@ -74,8 +85,6 @@ class Entity extends BaseType {
     return this._LEI.value;
   }
 
-/** ## UNIT NUMBER */
-  private _UnitNumber: VarChar;
   /**
    * ### Unit Number 
    * Issuer/Entity/Contracting Party X Address Details (eg. HQ)
@@ -92,8 +101,6 @@ class Entity extends BaseType {
     return this._UnitNumber.value;
   }
 
-/** ## BUILDING NUMBER */
-  private _BuildingNumber: VarChar_tiny;
   /**
    * ### Building Number 
    * 
@@ -110,8 +117,6 @@ class Entity extends BaseType {
     return this._BuildingNumber.value;
   }
 
-/** ## STREET */
-  private _Street: VarChar_tiny;
   /**
    * ### Street 
    * 
@@ -128,8 +133,6 @@ class Entity extends BaseType {
     return this._Street.value;
   }
 
-/** ## SUBURB/CITY */
-  private _SuburbCity: VarChar_tiny;
   /**
    * ### Suburb/City 
    * 
@@ -146,8 +149,6 @@ class Entity extends BaseType {
     return this._SuburbCity.value;
   }
 
-/** ## TERRITORY/STATE/PROVINCE CODE */
-  private _TerritoryStateProvinceCode: FixedChar5;
   /**
    * ### Territory/State/Province Code 
    * 
@@ -164,8 +165,6 @@ class Entity extends BaseType {
     return this._TerritoryStateProvinceCode.value;
   }
 
-/** ## COUNTRY CODE */
-  private _CountryCode: FixedChar3;
   /**
    * ### Country Code 
    * 
@@ -182,8 +181,6 @@ class Entity extends BaseType {
     return this._CountryCode.value;
   }
 
-/** ## POSTAL/ZIP CODE */
-  private _PostalZIPCode: FixedChar12;
   /**
    * ### Postal/ZIP Code 
    * 
@@ -200,8 +197,6 @@ class Entity extends BaseType {
     return this._PostalZIPCode.value;
   }
 
-/** ## EMAIL ADDRESS */
-  private _EmailAddress: VarChar_tiny;
   /**
    * ### Email Address 
    * Length 0-255 bytes. Address for text-based communication: eg. email address, Bitcoin address
@@ -218,8 +213,6 @@ class Entity extends BaseType {
     return this._EmailAddress.value;
   }
 
-/** ## PHONE NUMBER */
-  private _PhoneNumber: VarChar_tiny;
   /**
    * ### Phone Number 
    * Length 0-255 bytes. 0 is valid. Phone Number for Entity.
@@ -236,8 +229,6 @@ class Entity extends BaseType {
     return this._PhoneNumber.value;
   }
 
-/** ## ADMINISTRATION */
-  private _Administration: Administrator[];
   /**
    * ### Administration 
    * A list of people that are in Administrative Roles for the Entity.  eg. Chair, Director, Managing Partner, etc.
@@ -251,11 +242,9 @@ class Entity extends BaseType {
    * A list of people that are in Administrative Roles for the Entity.  eg. Chair, Director, Managing Partner, etc.
    */
   public get Administration() : Administrator[] {
-    return this._Administration;
+    return this._Administration.map(i => i);
   }
 
-/** ## MANAGEMENT */
-  private _Management: Manager[];
   /**
    * ### Management 
    * A list of people in Management Roles for the Entity. e.g CEO, COO, CTO, CFO, Secretary, Executive, etc.
@@ -269,11 +258,9 @@ class Entity extends BaseType {
    * A list of people in Management Roles for the Entity. e.g CEO, COO, CTO, CFO, Secretary, Executive, etc.
    */
   public get Management() : Manager[] {
-    return this._Management;
+    return this._Management.map(i => i);
   }
 
-/** ## DOMAIN NAME */
-  private _DomainName: VarChar_tiny;
   /**
    * ### Domain Name 
    * Domain name owned by this entity. Length 0-255 bytes. 0 is valid.
@@ -290,8 +277,6 @@ class Entity extends BaseType {
     return this._DomainName.value;
   }
 
-/** ## PAYMAIL HANDLE */
-  private _PaymailHandle: VarChar_tiny;
   /**
    * ### Paymail Handle 
    * Length 0-255 bytes. Handle containing an alias and domain name performing queries defined in the Paymail protocol.

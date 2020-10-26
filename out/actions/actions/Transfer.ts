@@ -18,9 +18,12 @@ class Transfer extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## ASSETS */
   private _Assets: AssetTransfer[];
+  private _OfferExpiry: Timestamp;
+  private _ExchangeFee: UInt64;
+  private _ExchangeFeeAddress: Address;
+
+  
   /**
    * ### Assets 
    * The Assets involved in the Transfer Action.
@@ -34,11 +37,9 @@ class Transfer extends BaseType {
    * The Assets involved in the Transfer Action.
    */
   public get Assets() : AssetTransfer[] {
-    return this._Assets;
+    return this._Assets.map(i => i);
   }
 
-/** ## OFFER EXPIRY */
-  private _OfferExpiry: Timestamp;
   /**
    * ### Offer Expiry 
    * This prevents any party from holding on to the partially signed message as a form of an option.  Eg. the exchange at this price is valid for 30 mins.
@@ -55,8 +56,6 @@ class Transfer extends BaseType {
     return this._OfferExpiry.value;
   }
 
-/** ## EXCHANGE FEE */
-  private _ExchangeFee: UInt64;
   /**
    * ### Exchange Fee 
    * Fixed amount of bitcoin being paid to an exchange for facilitating a transfer.
@@ -73,8 +72,6 @@ class Transfer extends BaseType {
     return this._ExchangeFee.value;
   }
 
-/** ## EXCHANGE FEE ADDRESS */
-  private _ExchangeFeeAddress: Address;
   /**
    * ### Exchange Fee Address 
    * Identifies the public address that the exchange fee should be paid to.

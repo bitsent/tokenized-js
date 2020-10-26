@@ -18,9 +18,11 @@ class Document extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## DOCUMENT NAME */
   private _Name: VarChar;
+  private _Type: VarChar;
+  private _Contents: VarBin_medium;
+
+  
   /**
    * ### Document Name 
    * Full name, including file extension, of the file. Length 0-255 bytes. 0 is valid.
@@ -37,8 +39,6 @@ class Document extends BaseType {
     return this._Name.value;
   }
 
-/** ## MIME TYPE */
-  private _Type: VarChar;
   /**
    * ### MIME Type 
    * MIME type of the file. Length 0-255 bytes. 0 is valid. 
@@ -55,8 +55,6 @@ class Document extends BaseType {
     return this._Type.value;
   }
 
-/** ## FILE CONTENTS */
-  private _Contents: VarBin_medium;
   /**
    * ### File Contents 
    * The contents of the file.

@@ -19,6 +19,8 @@ class Membership extends BaseType {
   }
 
   
+
+  
 }
 
 export default Membership;

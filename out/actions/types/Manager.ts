@@ -18,9 +18,10 @@ class Manager extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## MANAGER TYPE */
   private _Type: Role;
+  private _Name: VarChar;
+
+  
   /**
    * ### Manager Type 
    * CEO, COO, CFO, etc. Found in 'Roles' in Specification/Resources
@@ -37,8 +38,6 @@ class Manager extends BaseType {
     return this._Type.value;
   }
 
-/** ## MANAGER NAME */
-  private _Name: VarChar;
   /**
    * ### Manager Name 
    * Length 0-255 bytes. 0 is valid.

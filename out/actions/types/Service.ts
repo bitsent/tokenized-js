@@ -19,9 +19,11 @@ class Service extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## TYPE */
   private _Type: UInt8;
+  private _URL: VarChar;
+  private _PublicKey: PublicKey;
+
+  
   /**
    * ### Type 
    * Describes the type of service.
@@ -46,8 +48,6 @@ class Service extends BaseType {
     return this._Type.value;
   }
 
-/** ## URL */
-  private _URL: VarChar;
   /**
    * ### URL 
    * The base URL of the service. For each service type there are predefined methods for  determining the specific endpoints.
@@ -64,8 +64,6 @@ class Service extends BaseType {
     return this._URL.value;
   }
 
-/** ## PUBLIC KEY */
-  private _PublicKey: PublicKey;
   /**
    * ### Public Key 
    * The public key used to verify and authorize the service.

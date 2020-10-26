@@ -18,9 +18,10 @@ class ContractAddressChange extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## NEW CONTRACT ADDRESS */
   private _NewContractAddress: Address;
+  private _Timestamp: Timestamp;
+
+  
   /**
    * ### New Contract Address 
    * The address to be used by all future requests/responses for the contract.
@@ -37,8 +38,6 @@ class ContractAddressChange extends BaseType {
     return this._NewContractAddress.value;
   }
 
-/** ## TIMESTAMP */
-  private _Timestamp: Timestamp;
   /**
    * ### Timestamp 
    * Timestamp in nanoseconds of when the action was created.

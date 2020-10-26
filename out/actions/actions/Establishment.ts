@@ -18,9 +18,9 @@ class Establishment extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## MESSAGE */
   private _Message: VarChar_medium;
+
+  
   /**
    * ### Message 
    * A custom message to include with this action.

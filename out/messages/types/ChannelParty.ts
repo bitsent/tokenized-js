@@ -18,9 +18,10 @@ class ChannelParty extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## ADMINISTRATIVE ADDRESS */
   private _AdministrativeAddress: Address;
+  private _OutputIndex: UInt32;
+
+  
   /**
    * ### Administrative Address 
    * The address representing the locking script that is required to perform entity administrative level operations on a channel. Such as add/remove a member, accept/reject proposals, and requesting/receiving payments. This is recommended to be an m of n multi-signature address.
@@ -37,8 +38,6 @@ class ChannelParty extends BaseType {
     return this._AdministrativeAddress.value;
   }
 
-/** ## OUTPUT INDEX */
-  private _OutputIndex: UInt32;
   /**
    * ### Output Index 
    * Specifies the output containing the locking script for the party. It should also be included in the M1 ReceiverIndexes. That output must respond with a proof of identity that identifies the company involved.

@@ -18,9 +18,11 @@ class CommonShare extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## TICKER SYMBOL */
   private _Ticker: FixedChar5;
+  private _ISIN: FixedChar12;
+  private _Description: VarChar_small;
+
+  
   /**
    * ### Ticker Symbol 
    * Ticker symbol assigned by exchanges to represent the asset.
@@ -37,8 +39,6 @@ class CommonShare extends BaseType {
     return this._Ticker.value;
   }
 
-/** ## ISIN (OPTIONAL) */
-  private _ISIN: FixedChar12;
   /**
    * ### ISIN (optional) 
    * International Securities Identification Number
@@ -55,8 +55,6 @@ class CommonShare extends BaseType {
     return this._ISIN.value;
   }
 
-/** ## DESCRIPTION */
-  private _Description: VarChar_small;
   /**
    * ### Description 
    * undefined

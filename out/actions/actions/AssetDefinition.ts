@@ -19,9 +19,20 @@ class AssetDefinition extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## ASSET PERMISSIONS */
   private _AssetPermissions: VarBin_small;
+  private _TransfersPermitted: BooleanType;
+  private _TradeRestrictions: Polity[];
+  private _EnforcementOrdersPermitted: BooleanType;
+  private _VotingRights: BooleanType;
+  private _VoteMultiplier: UInt8;
+  private _AdministrationProposal: BooleanType;
+  private _HolderProposal: BooleanType;
+  private _AssetModificationGovernance: UInt8;
+  private _TokenQty: UInt64;
+  private _AssetType: AssetType;
+  private _AssetPayload: VarBin_small;
+
+  
   /**
    * ### Asset Permissions 
    * A set of permission objects containing switches and field references that define the permissions for modifying this asset. See the Permission documentation for more detail.
@@ -38,8 +49,6 @@ class AssetDefinition extends BaseType {
     return this._AssetPermissions.value;
   }
 
-/** ## TRANSFERS PERMITTED */
-  private _TransfersPermitted: BooleanType;
   /**
    * ### Transfers Permitted 
    * Set to true if transfers are permitted between two parties, otherwise set to false to prevent peer-to-peer transfers.
@@ -56,8 +65,6 @@ class AssetDefinition extends BaseType {
     return this._TransfersPermitted.value;
   }
 
-/** ## TRADE RESTRICTIONS */
-  private _TradeRestrictions: Polity[];
   /**
    * ### Trade Restrictions 
    * If specified, the asset can only be traded within the specified trade restriction zone. For example, AUS would restrict to Australian residents only.
@@ -74,8 +81,6 @@ class AssetDefinition extends BaseType {
     return this._TradeRestrictions.map(i => i.value);
   }
 
-/** ## ENFORCEMENT ORDERS PERMITTED */
-  private _EnforcementOrdersPermitted: BooleanType;
   /**
    * ### Enforcement Orders Permitted 
    * Set to true if the administration is permitted to make enforcement orders on user tokens and balances, otherwise set to false to disable this feature.
@@ -92,8 +97,6 @@ class AssetDefinition extends BaseType {
     return this._EnforcementOrdersPermitted.value;
   }
 
-/** ## VOTING RIGHTS */
-  private _VotingRights: BooleanType;
   /**
    * ### Voting Rights 
    * When false holders of this asset will not be able to vote for tokens of this asset even on voting systems in which vote multiplers are not permitted.
@@ -110,8 +113,6 @@ class AssetDefinition extends BaseType {
     return this._VotingRights.value;
   }
 
-/** ## VOTE MULTIPLIER */
-  private _VoteMultiplier: UInt8;
   /**
    * ### Vote Multiplier 
    * Multiplies a vote by the specified integer. Where 1 token is equal to 1 vote with a 1 for vote multipler (normal), 1 token = 3 votes with a multiplier of 3, for example. If zero, then holders of this asset don't get any votes for their tokens.
@@ -128,8 +129,6 @@ class AssetDefinition extends BaseType {
     return this._VoteMultiplier.value;
   }
 
-/** ## ADMINISTRATION PROPOSAL */
-  private _AdministrationProposal: BooleanType;
   /**
    * ### Administration Proposal 
    * Set to true if the administration is permitted to make proposals outside of the smart contract scope.
@@ -146,8 +145,6 @@ class AssetDefinition extends BaseType {
     return this._AdministrationProposal.value;
   }
 
-/** ## HOLDER PROPOSAL */
-  private _HolderProposal: BooleanType;
   /**
    * ### Holder Proposal 
    * Set to true if a holder is permitted to make proposals outside of the smart contract scope.
@@ -164,8 +161,6 @@ class AssetDefinition extends BaseType {
     return this._HolderProposal.value;
   }
 
-/** ## ASSET MODIFICATION GOVERNANCE */
-  private _AssetModificationGovernance: UInt8;
   /**
    * ### Asset Modification Governance 
    * Supported values: 1 - Contract-wide Asset Governance. 0 - Asset-wide Asset Governance.  If a referendum or initiative is used to propose a modification to a subfield controlled by the asset permissions, then the vote will either be a contract-wide vote (all assets vote on the referendum/initiative) or an asset-wide vote (only this asset votes on the referendum/initiative) depending on the value in this subfield.  The voting system specifies the voting rules.
@@ -182,8 +177,6 @@ class AssetDefinition extends BaseType {
     return this._AssetModificationGovernance.value;
   }
 
-/** ## TOKEN QUANTITY */
-  private _TokenQty: UInt64;
   /**
    * ### Token Quantity 
    * The number of tokens to issue with this asset. Set to greater than zero for fungible tokens. If the value is 1 then it becomes a non-fungible token, where the contract would have many assets. Set to 0 to represent a placeholder asset, where tokens are to be issued later, or to represent a decomissioned asset where all tokens have been revoked.
@@ -200,8 +193,6 @@ class AssetDefinition extends BaseType {
     return this._TokenQty.value;
   }
 
-/** ## ASSET TYPE */
-  private _AssetType: AssetType;
   /**
    * ### Asset Type 
    * A code representing the type of asset and the structure of the payload.
@@ -218,8 +209,6 @@ class AssetDefinition extends BaseType {
     return this._AssetType.value;
   }
 
-/** ## ASSET PAYLOAD */
-  private _AssetPayload: VarBin_small;
   /**
    * ### Asset Payload 
    * A custom payload that contains meta data about this asset. Payload structure and length is dependent on the asset type chosen. See asset documentation for more details.

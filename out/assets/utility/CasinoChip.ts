@@ -18,9 +18,14 @@ class CasinoChip extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## CURRENCY CODE */
   private _CurrencyCode: CurrencyType;
+  private _UseType: FixedChar1;
+  private _AgeRestriction: AgeRestriction;
+  private _ValidFrom: Timestamp;
+  private _ExpirationTimestamp: Timestamp;
+  private _Precision: UInt64;
+
+  
   /**
    * ### Currency Code 
    * International Organization for Standardization code for Currency. (Specification/Resources)
@@ -37,8 +42,6 @@ class CasinoChip extends BaseType {
     return this._CurrencyCode.value;
   }
 
-/** ## USE TYPE */
-  private _UseType: FixedChar1;
   /**
    * ### Use Type 
    * Real Money (R), Social (S), Free Play (F)
@@ -55,8 +58,6 @@ class CasinoChip extends BaseType {
     return this._UseType.value;
   }
 
-/** ## AGE RESTRICTION */
-  private _AgeRestriction: AgeRestriction;
   /**
    * ### Age Restriction 
    * Age restriction is used to specify required ages for asset ownership.
@@ -73,8 +74,6 @@ class CasinoChip extends BaseType {
     return this._AgeRestriction;
   }
 
-/** ## VALID FROM */
-  private _ValidFrom: Timestamp;
   /**
    * ### Valid From 
    * undefined
@@ -91,8 +90,6 @@ class CasinoChip extends BaseType {
     return this._ValidFrom.value;
   }
 
-/** ## EXPIRATION TIMESTAMP */
-  private _ExpirationTimestamp: Timestamp;
   /**
    * ### Expiration Timestamp 
    * undefined
@@ -109,8 +106,6 @@ class CasinoChip extends BaseType {
     return this._ExpirationTimestamp.value;
   }
 
-/** ## PRECISION */
-  private _Precision: UInt64;
   /**
    * ### Precision 
    * Required field to specify the decimal precision of a currency. It will normally be the "precision" value associated with the CurrencyCode. It is the number of decimal places between the number of tokens and the common unit of measure. For example, in AUD, the common unit is the dollar, but a token would only be worth a penny. So the precision should be 2 for the two decimal places in a dollar amount "$1.00". In this scenario 100 tokens are worth $1.

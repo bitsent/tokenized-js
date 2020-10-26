@@ -18,9 +18,10 @@ class AgeRestriction extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## LOWER AGE LIMIT */
   private _Lower: UInt8;
+  private _Upper: UInt8;
+
+  
   /**
    * ### Lower Age Limit 
    * The lowest age valid to own asset. Zero for no restriction.
@@ -37,8 +38,6 @@ class AgeRestriction extends BaseType {
     return this._Lower.value;
   }
 
-/** ## UPPER AGE LIMIT */
-  private _Upper: UInt8;
   /**
    * ### Upper Age Limit 
    * The highest age valid to own asset. Zero for no restriction.

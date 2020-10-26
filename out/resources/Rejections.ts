@@ -19,6 +19,8 @@ class Rejections extends BaseType {
   }
 
   
+
+  
 }
 
 export default Rejections;

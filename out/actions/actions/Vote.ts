@@ -18,9 +18,9 @@ class Vote extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## TIMESTAMP */
   private _Timestamp: Timestamp;
+
+  
   /**
    * ### Timestamp 
    * Timestamp in nanoseconds of when the smart contract created the action.

@@ -18,9 +18,12 @@ class RelationshipAmendment extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## SEED */
   private _Seed: VarBin;
+  private _BaseEncryptionSecret: VarBin;
+  private _AddMemberIndexes: UInt32;
+  private _DropMemberIndexes: UInt32;
+
+  
   /**
    * ### Seed 
    * The new seed used to derive keys for the relationship after this message.
@@ -37,8 +40,6 @@ class RelationshipAmendment extends BaseType {
     return this._Seed.value;
   }
 
-/** ## BASE ENCRYPTION SECRET */
-  private _BaseEncryptionSecret: VarBin;
   /**
    * ### Base Encryption Secret 
    * The new base encryption secret used to derive encryption secrets for the relationship after this message. Each time a message is sent, the current seed hash is added to the base encryption secret and that value is used to encrypt the message.
@@ -55,8 +56,6 @@ class RelationshipAmendment extends BaseType {
     return this._BaseEncryptionSecret.value;
   }
 
-/** ## ADD MEMBER INDEXES */
-  private _AddMemberIndexes: UInt32;
   /**
    * ### Add Member Indexes 
    * Indexes to the outputs of the members that are being added to the group.
@@ -73,8 +72,6 @@ class RelationshipAmendment extends BaseType {
     return this._AddMemberIndexes.value;
   }
 
-/** ## DROP MEMBER INDEXES */
-  private _DropMemberIndexes: UInt32;
   /**
    * ### Drop Member Indexes 
    * Indexes to the outputs of the members that are being removed from the group.

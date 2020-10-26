@@ -19,9 +19,10 @@ class Thaw extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## FREEZE TX ID */
   private _FreezeTxId: TxId;
+  private _Timestamp: Timestamp;
+
+  
   /**
    * ### Freeze Tx Id 
    * The tx id of the freeze action that is being reversed.
@@ -38,8 +39,6 @@ class Thaw extends BaseType {
     return this._FreezeTxId.value;
   }
 
-/** ## TIMESTAMP */
-  private _Timestamp: Timestamp;
   /**
    * ### Timestamp 
    * Timestamp in nanoseconds of when the smart contract created the action.

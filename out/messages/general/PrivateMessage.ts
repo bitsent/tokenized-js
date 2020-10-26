@@ -20,9 +20,13 @@ class PrivateMessage extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## TIMESTAMP */
   private _Timestamp: Timestamp;
+  private _Subject: VarChar_small;
+  private _Regarding: Outpoint;
+  private _PrivateMessage: Document;
+  private _Attachments: Document[];
+
+  
   /**
    * ### Timestamp 
    * Timestamp in nanoseconds for when the message sender creates the transaction.
@@ -39,8 +43,6 @@ class PrivateMessage extends BaseType {
     return this._Timestamp.value;
   }
 
-/** ## SUBJECT */
-  private _Subject: VarChar_small;
   /**
    * ### Subject 
    * The subject / topic of the message.
@@ -57,8 +59,6 @@ class PrivateMessage extends BaseType {
     return this._Subject.value;
   }
 
-/** ## REGARDING */
-  private _Regarding: Outpoint;
   /**
    * ### Regarding 
    * The output of the message that this message is regarding (responding to).
@@ -75,8 +75,6 @@ class PrivateMessage extends BaseType {
     return this._Regarding;
   }
 
-/** ## PRIVATE MESSAGE */
-  private _PrivateMessage: Document;
   /**
    * ### Private Message 
    * Tokenized Ltd announces product launch.
@@ -93,8 +91,6 @@ class PrivateMessage extends BaseType {
     return this._PrivateMessage;
   }
 
-/** ## ATTACHMENTS */
-  private _Attachments: Document[];
   /**
    * ### Attachments 
    * Documents attached to the message.
@@ -108,7 +104,7 @@ class PrivateMessage extends BaseType {
    * Documents attached to the message.
    */
   public get Attachments() : Document[] {
-    return this._Attachments;
+    return this._Attachments.map(i => i);
   }
 }
 

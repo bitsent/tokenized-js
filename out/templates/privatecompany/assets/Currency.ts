@@ -19,6 +19,8 @@ class Currency extends BaseType {
   }
 
   
+
+  
 }
 
 export default Currency;

@@ -18,9 +18,10 @@ class ReferenceTransaction extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## TRANSACTION */
   private _Transaction: VarBin;
+  private _Outputs: VarBin_large[];
+
+  
   /**
    * ### Transaction 
    * A bitcoin transaction serialized in the bitcoin P2P format.
@@ -37,8 +38,6 @@ class ReferenceTransaction extends BaseType {
     return this._Transaction.value;
   }
 
-/** ## OUTPUTS */
-  private _Outputs: VarBin_large[];
   /**
    * ### Outputs 
    * The bitcoin outputs corresponding to the inputs for the transaction. Serialized in bitcoin P2P format. There must be the same count as there are inputs in the contained transaction and they must be in the same order.

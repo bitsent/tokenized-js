@@ -19,9 +19,11 @@ class IdentityOracleProof extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## USER ID */
   private _UserID: VarBin;
+  private _Entity: Entity;
+  private _OracleSignature: OracleSignature;
+
+  
   /**
    * ### User ID 
    * The user id (UUID) in the identity oracle system. Used to request the entity data.
@@ -38,8 +40,6 @@ class IdentityOracleProof extends BaseType {
     return this._UserID.value;
   }
 
-/** ## ENTITY */
-  private _Entity: Entity;
   /**
    * ### Entity 
    * PII is not allowed in entity by GDPR, so only company information can be placed in this entity. In the future this might be supported for PII with better understanding of GDPR. The identity being provided. EntityContractAddress is located within this structure.
@@ -56,8 +56,6 @@ class IdentityOracleProof extends BaseType {
     return this._Entity;
   }
 
-/** ## ORACLESIGNATURE */
-  private _OracleSignature: OracleSignature;
   /**
    * ### OracleSignature 
    * Signature of the serialized entity, public key, and block hash with the identity oracle's public key.

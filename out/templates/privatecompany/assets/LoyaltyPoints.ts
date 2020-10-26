@@ -19,6 +19,8 @@ class LoyaltyPoints extends BaseType {
   }
 
   
+
+  
 }
 
 export default LoyaltyPoints;

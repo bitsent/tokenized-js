@@ -18,9 +18,11 @@ class OutputMetadata extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## OUTPUT DESCRIPTION */
   private _OutputDescription: VarChar_medium;
+  private _Tags: Tag[];
+  private _CustomTags: OutputTag[];
+
+  
   /**
    * ### Output Description 
    * A Description that accompanies the output. A transaction description.
@@ -37,8 +39,6 @@ class OutputMetadata extends BaseType {
     return this._OutputDescription.value;
   }
 
-/** ## TAGS */
-  private _Tags: Tag[];
   /**
    * ### Tags 
    * Predefined values for describing the output.
@@ -55,8 +55,6 @@ class OutputMetadata extends BaseType {
     return this._Tags.map(i => i.value);
   }
 
-/** ## CUSTOM TAGS */
-  private _CustomTags: OutputTag[];
   /**
    * ### Custom Tags 
    * Free form text fields for describing the output. Groceries, Moomba Gas Compressor Project, Cash Register 3, Fitness, Entertainment, Special, VIP Section, North Carolina Store, Waitress: Cindy Smith, etc.
@@ -70,7 +68,7 @@ class OutputMetadata extends BaseType {
    * Free form text fields for describing the output. Groceries, Moomba Gas Compressor Project, Cash Register 3, Fitness, Entertainment, Special, VIP Section, North Carolina Store, Waitress: Cindy Smith, etc.
    */
   public get CustomTags() : OutputTag[] {
-    return this._CustomTags;
+    return this._CustomTags.map(i => i);
   }
 }
 

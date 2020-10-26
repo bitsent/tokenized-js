@@ -18,9 +18,18 @@ class AdmissionTicket extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## AGE RESTRICTION */
   private _AgeRestriction: AgeRestriction;
+  private _AdmissionType: FixedChar3;
+  private _Venue: VarChar;
+  private _Class: VarChar;
+  private _Area: VarChar;
+  private _Seat: VarChar;
+  private _StartTimeDate: Timestamp;
+  private _ValidFrom: Timestamp;
+  private _ExpirationTimestamp: Timestamp;
+  private _Description: VarChar_small;
+
+  
   /**
    * ### Age Restriction 
    * Age restriction is used to specify required ages for asset ownership.
@@ -37,8 +46,6 @@ class AdmissionTicket extends BaseType {
     return this._AgeRestriction;
   }
 
-/** ## ADMISSION TYPE */
-  private _AdmissionType: FixedChar3;
   /**
    * ### Admission Type 
    * undefined
@@ -55,8 +62,6 @@ class AdmissionTicket extends BaseType {
     return this._AdmissionType.value;
   }
 
-/** ## VENUE */
-  private _Venue: VarChar;
   /**
    * ### Venue 
    * undefined
@@ -73,8 +78,6 @@ class AdmissionTicket extends BaseType {
     return this._Venue.value;
   }
 
-/** ## CLASS */
-  private _Class: VarChar;
   /**
    * ### Class 
    * undefined
@@ -91,8 +94,6 @@ class AdmissionTicket extends BaseType {
     return this._Class.value;
   }
 
-/** ## AREA */
-  private _Area: VarChar;
   /**
    * ### Area 
    * undefined
@@ -109,8 +110,6 @@ class AdmissionTicket extends BaseType {
     return this._Area.value;
   }
 
-/** ## SEAT */
-  private _Seat: VarChar;
   /**
    * ### Seat 
    * undefined
@@ -127,8 +126,6 @@ class AdmissionTicket extends BaseType {
     return this._Seat.value;
   }
 
-/** ## START TIME AND DATE */
-  private _StartTimeDate: Timestamp;
   /**
    * ### Start Time and Date 
    * undefined
@@ -145,8 +142,6 @@ class AdmissionTicket extends BaseType {
     return this._StartTimeDate.value;
   }
 
-/** ## VALID FROM */
-  private _ValidFrom: Timestamp;
   /**
    * ### Valid From 
    * undefined
@@ -163,8 +158,6 @@ class AdmissionTicket extends BaseType {
     return this._ValidFrom.value;
   }
 
-/** ## EXPIRATION TIMESTAMP */
-  private _ExpirationTimestamp: Timestamp;
   /**
    * ### Expiration Timestamp 
    * undefined
@@ -181,8 +174,6 @@ class AdmissionTicket extends BaseType {
     return this._ExpirationTimestamp.value;
   }
 
-/** ## DESCRIPTION */
-  private _Description: VarChar_small;
   /**
    * ### Description 
    * undefined

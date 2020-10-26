@@ -18,9 +18,15 @@ class Coupon extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## REDEEMING ENTITY */
   private _RedeemingEntity: VarChar;
+  private _IssueDate: Timestamp;
+  private _ExpiryDate: Timestamp;
+  private _Value: UInt64;
+  private _Currency: CurrencyType;
+  private _Description: VarChar_small;
+  private _Precision: UInt64;
+
+  
   /**
    * ### Redeeming Entity 
    * The entity responsible for redemption of this coupon.
@@ -37,8 +43,6 @@ class Coupon extends BaseType {
     return this._RedeemingEntity.value;
   }
 
-/** ## ISSUE DATE */
-  private _IssueDate: Timestamp;
   /**
    * ### Issue Date 
    * undefined
@@ -55,8 +59,6 @@ class Coupon extends BaseType {
     return this._IssueDate.value;
   }
 
-/** ## EXPIRY DATE */
-  private _ExpiryDate: Timestamp;
   /**
    * ### Expiry Date 
    * undefined
@@ -73,8 +75,6 @@ class Coupon extends BaseType {
     return this._ExpiryDate.value;
   }
 
-/** ## VALUE */
-  private _Value: UInt64;
   /**
    * ### Value 
    * undefined
@@ -91,8 +91,6 @@ class Coupon extends BaseType {
     return this._Value.value;
   }
 
-/** ## CURRENCY */
-  private _Currency: CurrencyType;
   /**
    * ### Currency 
    * International Organization for Standardization code for Currency. Currency for coupon. From resources/currency.
@@ -109,8 +107,6 @@ class Coupon extends BaseType {
     return this._Currency.value;
   }
 
-/** ## DESCRIPTION */
-  private _Description: VarChar_small;
   /**
    * ### Description 
    * undefined
@@ -127,8 +123,6 @@ class Coupon extends BaseType {
     return this._Description.value;
   }
 
-/** ## PRECISION */
-  private _Precision: UInt64;
   /**
    * ### Precision 
    * Required field to specify the decimal precision of a currency. It will normally be the "precision" value associated with the Currency. It is the number of decimal places between the number of tokens and the common unit of measure. For example, in AUD, the common unit is the dollar, but a token would only be worth a penny. So the precision should be 2 for the two decimal places in a dollar amount "$1.00". In this scenario 100 tokens are worth $1.

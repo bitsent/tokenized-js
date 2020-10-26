@@ -18,9 +18,10 @@ class Administrator extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## ADMINISTRATOR TYPE */
   private _Type: Role;
+  private _Name: VarChar;
+
+  
   /**
    * ### Administrator Type 
    * Chairman, Director, Managing Partner, etc.. Found in 'Roles' in Specification/Resources
@@ -37,8 +38,6 @@ class Administrator extends BaseType {
     return this._Type.value;
   }
 
-/** ## ADMINISTRATOR NAME */
-  private _Name: VarChar;
   /**
    * ### Administrator Name 
    * Length 0-255 bytes. 0 is valid.

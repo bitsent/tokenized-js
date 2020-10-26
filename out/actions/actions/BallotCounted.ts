@@ -18,9 +18,12 @@ class BallotCounted extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## VOTE TX ID */
   private _VoteTxId: TxId;
+  private _Vote: VarChar;
+  private _Quantity: UInt64;
+  private _Timestamp: Timestamp;
+
+  
   /**
    * ### Vote Tx ID 
    * Tx ID of the Vote the Ballot Cast is being made for.
@@ -37,8 +40,6 @@ class BallotCounted extends BaseType {
     return this._VoteTxId.value;
   }
 
-/** ## VOTE */
-  private _Vote: VarChar;
   /**
    * ### Vote 
    * Length 1-255 bytes. 0 is not valid. Max length is the VoteMax value from the Proposal action. Accept, Reject, Abstain, Spoiled, Multiple Choice, or Preference List. 15 options total. Order of preference. 1st position = 1st choice. 2nd position = 2nd choice, etc. A is always Accept and B is always reject in a Y/N votes.
@@ -55,8 +56,6 @@ class BallotCounted extends BaseType {
     return this._Vote.value;
   }
 
-/** ## QUANTITY */
-  private _Quantity: UInt64;
   /**
    * ### Quantity 
    * Number of votes counted for this ballot. Factors in vote multipliers if there are any allowed, otherwise it is just quantity of tokens held.
@@ -73,8 +72,6 @@ class BallotCounted extends BaseType {
     return this._Quantity.value;
   }
 
-/** ## TIMESTAMP */
-  private _Timestamp: Timestamp;
   /**
    * ### Timestamp 
    * Timestamp in nanoseconds of when the smart contract created the action.

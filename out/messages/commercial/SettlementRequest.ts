@@ -18,9 +18,12 @@ class SettlementRequest extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## TIMESTAMP */
   private _Timestamp: Timestamp;
+  private _TransferTxId: TxId;
+  private _ContractFees: TargetAddress[];
+  private _Settlement: VarBin_medium;
+
+  
   /**
    * ### Timestamp 
    * Timestamp in nanoseconds for when the message sender creates the transaction.
@@ -37,8 +40,6 @@ class SettlementRequest extends BaseType {
     return this._Timestamp.value;
   }
 
-/** ## TRANSFER TX ID */
-  private _TransferTxId: TxId;
   /**
    * ### Transfer Tx Id 
    * Tx Id of the transfer request transaction that triggered this message.
@@ -55,8 +56,6 @@ class SettlementRequest extends BaseType {
     return this._TransferTxId.value;
   }
 
-/** ## CONTRACT FEES */
-  private _ContractFees: TargetAddress[];
   /**
    * ### Contract Fees 
    * Contract fees (in bitcoin) and addresses(PKHs) where fees should be paid. Added by each contract as settlement data is added.
@@ -70,11 +69,9 @@ class SettlementRequest extends BaseType {
    * Contract fees (in bitcoin) and addresses(PKHs) where fees should be paid. Added by each contract as settlement data is added.
    */
   public get ContractFees() : TargetAddress[] {
-    return this._ContractFees;
+    return this._ContractFees.map(i => i);
   }
 
-/** ## SETTLEMENT */
-  private _Settlement: VarBin_medium;
   /**
    * ### Settlement 
    * Serialized settlement OP_RETURN that needs data added by another contract.

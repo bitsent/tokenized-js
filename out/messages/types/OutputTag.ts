@@ -18,9 +18,9 @@ class OutputTag extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## TAG */
   private _Tag: VarChar;
+
+  
   /**
    * ### Tag 
    * The text of the tag.

@@ -18,9 +18,10 @@ class InitiateThread extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## FLAG */
   private _Flag: VarBin;
+  private _Seed: VarBin;
+
+  
   /**
    * ### Flag 
    * The flag is required to identify messages in the thread so that all members don't have to be tagged in each message. It is recommended to be a random 20 byte value similar to public key hashes. The flag will be the Payload of an Envelope protocol message with a Payload Protocol ID of "F"
@@ -37,8 +38,6 @@ class InitiateThread extends BaseType {
     return this._Flag.value;
   }
 
-/** ## SEED */
-  private _Seed: VarBin;
   /**
    * ### Seed 
    * The seed used to derive keys for the thread. If this value is not specified, then the original seed value from the parent conversation or channel is used.

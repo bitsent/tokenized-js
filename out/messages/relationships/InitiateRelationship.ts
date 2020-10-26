@@ -18,9 +18,15 @@ class InitiateRelationship extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## TYPE */
   private _Type: UInt8;
+  private _Seed: VarBin;
+  private _Flag: VarBin;
+  private _EncryptionType: UInt8;
+  private _ProofOfIdentityType: ProofOfIdentityType;
+  private _ProofOfIdentity: VarBin;
+  private _ChannelParties: ChannelParty[];
+
+  
   /**
    * ### Type 
    * The type or purposed of the relationship. 0 - Conversation (direct messages), 1 - Channel (entity/business to entity/business)
@@ -37,8 +43,6 @@ class InitiateRelationship extends BaseType {
     return this._Type.value;
   }
 
-/** ## SEED */
-  private _Seed: VarBin;
   /**
    * ### Seed 
    * The seed used to derive keys for the relationship.
@@ -55,8 +59,6 @@ class InitiateRelationship extends BaseType {
     return this._Seed.value;
   }
 
-/** ## FLAG */
-  private _Flag: VarBin;
   /**
    * ### Flag 
    * The flag can optionally be used to identify messages in the relationship so that all members don't have to be tagged in each message. It isn't needed for two party relationships, but is recommended for relationships with more members. It will be included in it's own op return for all message transactions. It is recommended to be a random 20 byte value similar to public key hashes. The flag will be the Payload of an Envelope protocol message with a Payload Protocol ID of "F". If this value is not specified then there must be an output to the next key in the relationship chain for every member in the group.
@@ -73,8 +75,6 @@ class InitiateRelationship extends BaseType {
     return this._Flag.value;
   }
 
-/** ## ENCRYPTION TYPE */
-  private _EncryptionType: UInt8;
   /**
    * ### Encryption Type 
    * Type of encryption used for messages within the relationship. 0 - Encryption keys embedded in envelope protocol. 1 - Encryption key embedded in this message is used as base key for future messages. Used for relationships with more than 2 members so the encryption key doesn't have to be encrypted to each member in every message.
@@ -91,8 +91,6 @@ class InitiateRelationship extends BaseType {
     return this._EncryptionType.value;
   }
 
-/** ## PROOF OF IDENTITY TYPE */
-  private _ProofOfIdentityType: ProofOfIdentityType;
   /**
    * ### Proof of Identity Type 
    * The type/format of the sender's proof of identity.
@@ -109,8 +107,6 @@ class InitiateRelationship extends BaseType {
     return this._ProofOfIdentityType.value;
   }
 
-/** ## PROOF OF IDENTITY */
-  private _ProofOfIdentity: VarBin;
   /**
    * ### Proof of Identity 
    * Sender's proof of identity.
@@ -127,8 +123,6 @@ class InitiateRelationship extends BaseType {
     return this._ProofOfIdentity.value;
   }
 
-/** ## CHANNEL PARTIES */
-  private _ChannelParties: ChannelParty[];
   /**
    * ### Channel Parties 
    * Information about the entities in the channel. Not included if this is not a channel initiation. These represent the companies in a channel. A channel is recommended to have 2 entities and several individual members per party. The individual members can discuss terms while the parties are used for official actions.
@@ -142,7 +136,7 @@ class InitiateRelationship extends BaseType {
    * Information about the entities in the channel. Not included if this is not a channel initiation. These represent the companies in a channel. A channel is recommended to have 2 entities and several individual members per party. The individual members can discuss terms while the parties are used for official actions.
    */
   public get ChannelParties() : ChannelParty[] {
-    return this._ChannelParties;
+    return this._ChannelParties.map(i => i);
   }
 }
 

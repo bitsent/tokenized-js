@@ -18,9 +18,10 @@ class QuantityIndex extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## INDEX */
   private _Index: UInt16;
+  private _Quantity: UInt64;
+
+  
   /**
    * ### Index 
    * The index of the input/output (depending on context) sending/receiving the tokens.
@@ -37,8 +38,6 @@ class QuantityIndex extends BaseType {
     return this._Index.value;
   }
 
-/** ## QUANTITY */
-  private _Quantity: UInt64;
   /**
    * ### Quantity 
    * Number of tokens being sent

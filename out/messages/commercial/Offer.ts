@@ -18,9 +18,10 @@ class Offer extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## TIMESTAMP */
   private _Timestamp: Timestamp;
+  private _Payload: VarBin_medium;
+
+  
   /**
    * ### Timestamp 
    * Timestamp in nanoseconds for when the message sender created the offer.
@@ -37,8 +38,6 @@ class Offer extends BaseType {
     return this._Timestamp.value;
   }
 
-/** ## PAYLOAD */
-  private _Payload: VarBin_medium;
   /**
    * ### Payload 
    * Serialized Bitcoin transaction. The transaction needs data added by another party upon acceptance of offer.

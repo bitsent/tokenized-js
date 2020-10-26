@@ -18,9 +18,13 @@ class Rejection extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## ADDRESS INDEXES */
   private _AddressIndexes: UInt32[];
+  private _RejectAddressIndex: UInt16;
+  private _RejectionCode: RejectionCode;
+  private _Message: VarChar_small;
+  private _Timestamp: Timestamp;
+
+  
   /**
    * ### Address Indexes 
    * Associates the message to a particular output by the index. If none are specified then the first output is assumed.
@@ -37,8 +41,6 @@ class Rejection extends BaseType {
     return this._AddressIndexes.map(i => i.value);
   }
 
-/** ## REJECT ADDRESS INDEX */
-  private _RejectAddressIndex: UInt16;
   /**
    * ### Reject Address Index 
    * The address which is believed to have caused the rejection.
@@ -55,8 +57,6 @@ class Rejection extends BaseType {
     return this._RejectAddressIndex.value;
   }
 
-/** ## REJECTION CODE */
-  private _RejectionCode: RejectionCode;
   /**
    * ### Rejection Code 
    * Classifies the rejection by a type.
@@ -73,8 +73,6 @@ class Rejection extends BaseType {
     return this._RejectionCode.value;
   }
 
-/** ## MESSAGE */
-  private _Message: VarChar_small;
   /**
    * ### Message 
    * Length 0-65,535 bytes. Message that explains the reasoning for a rejection, if needed.  Most rejection types will be captured by the Rejection Type Subfield.
@@ -91,8 +89,6 @@ class Rejection extends BaseType {
     return this._Message.value;
   }
 
-/** ## TIMESTAMP */
-  private _Timestamp: Timestamp;
   /**
    * ### Timestamp 
    * Timestamp in nanoseconds of when the smart contract created the action.

@@ -18,9 +18,13 @@ class LoyaltyPoints extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## AGE RESTRICTION */
   private _AgeRestriction: AgeRestriction;
+  private _OfferName: VarChar;
+  private _ValidFrom: Timestamp;
+  private _ExpirationTimestamp: Timestamp;
+  private _Description: VarChar_small;
+
+  
   /**
    * ### Age Restriction 
    * Age restriction is used to specify required ages for asset ownership.
@@ -37,8 +41,6 @@ class LoyaltyPoints extends BaseType {
     return this._AgeRestriction;
   }
 
-/** ## OFFER NAME */
-  private _OfferName: VarChar;
   /**
    * ### Offer Name 
    * undefined
@@ -55,8 +57,6 @@ class LoyaltyPoints extends BaseType {
     return this._OfferName.value;
   }
 
-/** ## VALID FROM */
-  private _ValidFrom: Timestamp;
   /**
    * ### Valid From 
    * undefined
@@ -73,8 +73,6 @@ class LoyaltyPoints extends BaseType {
     return this._ValidFrom.value;
   }
 
-/** ## EXPIRATION TIMESTAMP */
-  private _ExpirationTimestamp: Timestamp;
   /**
    * ### Expiration Timestamp 
    * undefined
@@ -91,8 +89,6 @@ class LoyaltyPoints extends BaseType {
     return this._ExpirationTimestamp.value;
   }
 
-/** ## DESCRIPTION */
-  private _Description: VarChar_small;
   /**
    * ### Description 
    * undefined

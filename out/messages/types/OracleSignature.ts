@@ -18,9 +18,13 @@ class OracleSignature extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## ORACLE URL */
   private _OracleURL: VarChar;
+  private _BlockHeight: UInt32;
+  private _ValidityPeriod: Period;
+  private _SignatureAlgorithm: UInt8;
+  private _Signature: VarBin;
+
+  
   /**
    * ### Oracle URL 
    * Base URL of the identity oracle that provided the signature.
@@ -37,8 +41,6 @@ class OracleSignature extends BaseType {
     return this._OracleURL.value;
   }
 
-/** ## BLOCK HEIGHT */
-  private _BlockHeight: UInt32;
   /**
    * ### Block Height 
    * The height of the block hash included in the data signed by the oracle. If the value is not included (zero), then no signature hash is included in the signed data.
@@ -55,8 +57,6 @@ class OracleSignature extends BaseType {
     return this._BlockHeight.value;
   }
 
-/** ## VALIDITY PERIOD */
-  private _ValidityPeriod: Period;
   /**
    * ### Validity Period 
    * The time frame that the proof is valid.
@@ -73,8 +73,6 @@ class OracleSignature extends BaseType {
     return this._ValidityPeriod;
   }
 
-/** ## SIGNATURE ALGORITHM */
-  private _SignatureAlgorithm: UInt8;
   /**
    * ### Signature Algorithm 
    * The algorithm used by the oracle signature.
@@ -91,8 +89,6 @@ class OracleSignature extends BaseType {
     return this._SignatureAlgorithm.value;
   }
 
-/** ## SIGNATURE */
-  private _Signature: VarBin;
   /**
    * ### Signature 
    * Signature of the related data with the oracle's public key.

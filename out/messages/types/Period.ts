@@ -18,9 +18,10 @@ class Period extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## BEGIN */
   private _Begin: Timestamp;
+  private _End: Timestamp;
+
+  
   /**
    * ### Begin 
    * The start of the period
@@ -37,8 +38,6 @@ class Period extends BaseType {
     return this._Begin.value;
   }
 
-/** ## END */
-  private _End: Timestamp;
   /**
    * ### End 
    * The end of the period

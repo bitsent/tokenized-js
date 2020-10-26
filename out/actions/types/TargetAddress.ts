@@ -18,9 +18,10 @@ class TargetAddress extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## ADDRESS */
   private _Address: Address;
+  private _Quantity: UInt64;
+
+  
   /**
    * ### Address 
    * Public address where the token balance will be changed.
@@ -37,8 +38,6 @@ class TargetAddress extends BaseType {
     return this._Address.value;
   }
 
-/** ## QUANTITY */
-  private _Quantity: UInt64;
   /**
    * ### Quantity 
    * Qty of tokens to be frozen, thawed, confiscated or reconciled. For Contract-wide freezes 0 will be used.

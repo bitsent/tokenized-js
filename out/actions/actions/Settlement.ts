@@ -18,9 +18,10 @@ class Settlement extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## ASSETS */
   private _Assets: AssetSettlement[];
+  private _Timestamp: Timestamp;
+
+  
   /**
    * ### Assets 
    * The Assets settled by the transfer action.
@@ -34,11 +35,9 @@ class Settlement extends BaseType {
    * The Assets settled by the transfer action.
    */
   public get Assets() : AssetSettlement[] {
-    return this._Assets;
+    return this._Assets.map(i => i);
   }
 
-/** ## TIMESTAMP */
-  private _Timestamp: Timestamp;
   /**
    * ### Timestamp 
    * Timestamp in nanoseconds of when the smart contract created the action.

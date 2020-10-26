@@ -19,9 +19,12 @@ class AdminIdentityCertificate extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## ENTITY CONTRACT */
   private _EntityContract: Address;
+  private _Signature: Signature;
+  private _BlockHeight: UInt32;
+  private _Expiration: Timestamp;
+
+  
   /**
    * ### Entity Contract 
    * The entity contract address of the service on chain that defines the identity oracle.
@@ -38,8 +41,6 @@ class AdminIdentityCertificate extends BaseType {
     return this._EntityContract.value;
   }
 
-/** ## SIGNATURE */
-  private _Signature: Signature;
   /**
    * ### Signature 
    * The signature provided by the oracle specified. The first input must correspond to the  administration entity and, if a contract operator is included, the second input must  correspond to the contract operator entity."
@@ -56,8 +57,6 @@ class AdminIdentityCertificate extends BaseType {
     return this._Signature.value;
   }
 
-/** ## BLOCK HEIGHT */
-  private _BlockHeight: UInt32;
   /**
    * ### Block height 
    * The block height of the block hash used in the oracle signature.
@@ -74,8 +73,6 @@ class AdminIdentityCertificate extends BaseType {
     return this._BlockHeight.value;
   }
 
-/** ## EXPIRATION */
-  private _Expiration: Timestamp;
   /**
    * ### Expiration 
    * Oracles have the option to specify an expiration after which a new certificate should be  provided.

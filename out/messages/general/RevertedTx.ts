@@ -18,9 +18,10 @@ class RevertedTx extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## TIMESTAMP */
   private _Timestamp: Timestamp;
+  private _Transaction: VarBin_medium;
+
+  
   /**
    * ### Timestamp 
    * Timestamp in nanoseconds for when the message sender creates the transaction.
@@ -37,8 +38,6 @@ class RevertedTx extends BaseType {
     return this._Timestamp.value;
   }
 
-/** ## TRANSACTION */
-  private _Transaction: VarBin_medium;
   /**
    * ### Transaction 
    * Serialized bitcoin transaction that was reverted/invalidated after being accepted.

@@ -18,9 +18,13 @@ class ContractAmendment extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## CHANGE ADMINISTRATION ADDRESS */
   private _ChangeAdministrationAddress: BooleanType;
+  private _ChangeOperatorAddress: BooleanType;
+  private _ContractRevision: UInt32;
+  private _Amendments: Amendment[];
+  private _RefTxID: TxId;
+
+  
   /**
    * ### Change Administration Address 
    * Used to change the administration address.  The new administration address must be in the input[1] position. A change of the administration or operator address requires both the operator and the administration address to be in the inputs (both signatures) of the Contract Amendment action.
@@ -37,8 +41,6 @@ class ContractAmendment extends BaseType {
     return this._ChangeAdministrationAddress.value;
   }
 
-/** ## CHANGE OPERATOR ADDRESS */
-  private _ChangeOperatorAddress: BooleanType;
   /**
    * ### Change Operator Address 
    * Used to change the smart contract operator address.  The new operator address must be in the input[1] position, unless the administration is being changed too, then it is in input[2]. A change of the administration or operator address requires both the operator and the administration address to be in the inputs (both signatures) of the Contract Amendment action.
@@ -55,8 +57,6 @@ class ContractAmendment extends BaseType {
     return this._ChangeOperatorAddress.value;
   }
 
-/** ## CONTRACT REVISION */
-  private _ContractRevision: UInt32;
   /**
    * ### Contract Revision 
    * Counter 0 to (2^32)-1
@@ -73,8 +73,6 @@ class ContractAmendment extends BaseType {
     return this._ContractRevision.value;
   }
 
-/** ## AMENDMENTS */
-  private _Amendments: Amendment[];
   /**
    * ### Amendments 
    * A collection of modifications to perform on this contract.
@@ -88,11 +86,9 @@ class ContractAmendment extends BaseType {
    * A collection of modifications to perform on this contract.
    */
   public get Amendments() : Amendment[] {
-    return this._Amendments;
+    return this._Amendments.map(i => i);
   }
 
-/** ## REF TX ID */
-  private _RefTxID: TxId;
   /**
    * ### Ref Tx ID 
    * The Bitcoin transaction ID of the associated result action that permitted the modifications. See Governance for more details.

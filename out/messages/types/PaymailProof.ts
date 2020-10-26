@@ -18,9 +18,11 @@ class PaymailProof extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## USER ID */
   private _UserID: VarBin;
+  private _Handle: VarChar;
+  private _OracleSignature: OracleSignature;
+
+  
   /**
    * ### User ID 
    * The user id (UUID) in the identity oracle system. Used to request the entity data.
@@ -37,8 +39,6 @@ class PaymailProof extends BaseType {
     return this._UserID.value;
   }
 
-/** ## HANDLE */
-  private _Handle: VarChar;
   /**
    * ### Handle 
    * PII including personally identifiable user names not allowed by GDPR. This is put in for possible future use without a protocol change. Paymail handle in the form {alias}@{domain}.{tld}
@@ -55,8 +55,6 @@ class PaymailProof extends BaseType {
     return this._Handle.value;
   }
 
-/** ## ORACLESIGNATURE */
-  private _OracleSignature: OracleSignature;
   /**
    * ### OracleSignature 
    * Signature of the serialized entity, public key, and block hash with the identity oracle's public key.

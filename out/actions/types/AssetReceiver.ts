@@ -18,9 +18,15 @@ class AssetReceiver extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## ADDRESS */
   private _Address: Address;
+  private _Quantity: UInt64;
+  private _OracleSigAlgorithm: UInt8;
+  private _OracleIndex: UInt8;
+  private _OracleConfirmationSig: Signature;
+  private _OracleSigBlockHeight: UInt32;
+  private _OracleSigExpiry: Timestamp;
+
+  
   /**
    * ### Address 
    * The address receiving the tokens
@@ -37,8 +43,6 @@ class AssetReceiver extends BaseType {
     return this._Address.value;
   }
 
-/** ## QUANTITY */
-  private _Quantity: UInt64;
   /**
    * ### Quantity 
    * Number of tokens to be received by address at Output X
@@ -55,8 +59,6 @@ class AssetReceiver extends BaseType {
     return this._Quantity.value;
   }
 
-/** ## ORACLE SIGNATURE ALGORITHM */
-  private _OracleSigAlgorithm: UInt8;
   /**
    * ### Oracle Signature Algorithm 
    * 0 = No Oracle-signed Message (OracleConfirmationSig skipped in serialization), 1 = ECDSA+secp256k1. If the contract for the asset being received has oracles, then a signature is required from one of them.
@@ -73,8 +75,6 @@ class AssetReceiver extends BaseType {
     return this._OracleSigAlgorithm.value;
   }
 
-/** ## ORACLE INDEX */
-  private _OracleIndex: UInt8;
   /**
    * ### Oracle Index 
    * Specifies the index into the list of oracles in the contract offer that was used to authorize this transfer.
@@ -91,8 +91,6 @@ class AssetReceiver extends BaseType {
     return this._OracleIndex.value;
   }
 
-/** ## ORACLE CONFIRMATION SIGNATURE */
-  private _OracleConfirmationSig: Signature;
   /**
    * ### Oracle Confirmation Signature 
    * Length 0-255 bytes. If restricted to a oracle (whitelist) or has transfer restrictions (age, location, investor status): ECDSA+secp256k1 (or the like) signed message provided by an approved/trusted oracle through an API signature of the defined message. If no transfer restrictions(trade restriction/age restriction fields in the Asset Type payload. or restricted to a whitelist by the Contract Auth Flags, it is a NULL field.
@@ -109,8 +107,6 @@ class AssetReceiver extends BaseType {
     return this._OracleConfirmationSig.value;
   }
 
-/** ## ORACLE SIGNATURE BLOCK HEIGHT */
-  private _OracleSigBlockHeight: UInt32;
   /**
    * ### Oracle Signature Block height 
    * The block height of the block hash used in the oracle signature.
@@ -127,8 +123,6 @@ class AssetReceiver extends BaseType {
     return this._OracleSigBlockHeight.value;
   }
 
-/** ## ORACLE SIGNATURE EXPIRY */
-  private _OracleSigExpiry: Timestamp;
   /**
    * ### Oracle Signature Expiry 
    * This specifies the time at which the Oracle signature expires.

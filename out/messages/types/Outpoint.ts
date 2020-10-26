@@ -18,9 +18,10 @@ class Outpoint extends BaseType {
     super.validateAllFields();
   }
 
-  
-/** ## TXID */
   private _TxId: TxId;
+  private _OutputIndex: UInt32;
+
+  
   /**
    * ### TxId 
    * undefined
@@ -37,8 +38,6 @@ class Outpoint extends BaseType {
     return this._TxId.value;
   }
 
-/** ## OUTPUT INDEX */
-  private _OutputIndex: UInt32;
   /**
    * ### Output Index 
    * The index of the output within the referenced transaction.
