@@ -4,7 +4,7 @@
   "description": "A JS library for Tokenized actions",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "generate": "node ./generate.js"
   },
   "keywords": [
     "Tokenized",
@@ -16,5 +16,6 @@
   "license": "SEE LICENSE IN LICENSE.MD",
   "devDependencies": {
     "yaml": "^1.10.0"
-  }
+  },
+  "dependencies": {}
 }
