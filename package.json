@@ -14,8 +14,6 @@
   ],
   "author": "Aleksandar Dinkov",
   "license": "SEE LICENSE IN LICENSE.MD",
-  "devDependencies": {
-    "yaml": "^1.10.0"
-  },
+  "devDependencies": {},
   "dependencies": {}
 }
