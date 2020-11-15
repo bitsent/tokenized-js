@@ -2,6 +2,7 @@ const exec = require("./exec");
 const fs = require("fs");
 const path = require("path");
 const yaml = require("yaml");
+const { relative } = require("path");
 
 const repoName = "specification";
 const gitRepo = `https://github.com/tokenized/${repoName}.git`;
@@ -209,6 +210,8 @@ async function generateCode(data, baseDir = __dirname + "/../out") {
     await generateType(data.types[i], data.typeLocations, baseDir);
   }
 
+  await generateSchemas(data.schemas, data.typeLocations, baseDir);
+
   console.log(data.types.length + " types generated!");
   if (unknownTypes.length) reportUnknownTypes(unknownTypes);
 }
@@ -400,4 +403,100 @@ async function traverseTree(tree, nodeCallback, currentPath = []) {
         await traverseTree(node, nodeCallback, [...currentPath, name]);
     }
   }
+}
+
+function generateSchemas(schemas, typeLocations, baseDir) {
+  for (let s = 0; s < schemas.length; s++) {
+    const schema = schemas[s];
+
+    const code = [];
+    const allExportNames = [];
+    const relativePathDepth = schema.path.length;
+    for (let i = 0; i < schema.node.fieldTypes.length; i++) {
+      const { importCode, exportNames } = generateImportCodeAndExportNames(
+        schema.node.fieldTypes[i],
+        typeLocations,
+        relativePathDepth
+      );
+      code.push(importCode);
+      allExportNames.push(...exportNames);
+    }
+    for (let i = 0; i < schema.node.messages.length; i++) {
+      const { importCode, exportNames } = generateImportCodeAndExportNames(
+        schema.node.messages[i],
+        typeLocations,
+        relativePathDepth
+      );
+      code.push(importCode);
+      allExportNames.push(...exportNames);
+    }
+    for (let i = 0; i < schema.node.resources.length; i++) {
+      const { importCode, exportNames } = generateImportCodeAndExportNames(
+        schema.node.resources[i],
+        typeLocations,
+        relativePathDepth,
+        ""
+      );
+      code.push(importCode);
+      allExportNames.push(...exportNames);
+    }
+    code.push("");
+    code.push("export default {");
+    for (let i = 0; i < allExportNames.length; i++) {
+      const [alias, name] = allExportNames[i];
+      code.push(`  ${alias}: ${name},`);
+    }
+    code.push("}");
+
+    fs.writeFileSync(
+      path.join(baseDir, ...schema.path, "index.ts"),
+      code.join("\n")
+    );
+  }
+
+  const schemaNames = schemas.map((i) =>
+    capitalize(parseName(i.path.reverse()[0])[0])
+  );
+  const importStatements = schemas.map((s, i) => {
+    return `import ${schemaNames[i]} from './${s.path.join("/")}';`;
+  });
+  importStatements.push(`import * as Base from './Base'`);
+  schemaNames.push("Base");
+  const exportStatement = `export default { ${schemaNames.join(", ")} }`;
+  fs.writeFileSync(
+    path.join(baseDir, "index.ts"),
+    [...importStatements, "", exportStatement].join("\n")
+  );
+}
+
+function generateImportCodeAndExportNames(
+  fieldPath,
+  typeLocations,
+  relativePathDepth,
+  importPathPrepend = "./"
+) {
+  const fieldNames = getTypeNameFromPath(fieldPath);
+  fieldPath = getPathForName(fieldNames[0], typeLocations, relativePathDepth);
+  const importCode = `import ${fieldNames[0]} from '${importPathPrepend}${fieldPath}';`;
+
+  exportNames = fieldNames.map((i) => [i, fieldNames[0]]);
+
+  return { importCode, exportNames };
+}
+
+function getTypeNameFromPath(typePath) {
+  const lastPathPart = typePath.split("/").reverse()[0];
+  const typeNames = parseName(lastPathPart);
+  return typeNames;
+}
+
+function getPathForName(typeName, typeLocations, relativePathDepth) {
+  const foldersFromRoot = typeLocations[typeName];
+  const pathUp = "../".repeat(relativePathDepth);
+  const pathDown = foldersFromRoot.join("/");
+  return `./${pathUp}${pathDown}/${typeName}`;
+}
+
+function capitalize(str) {
+  return str[0].toUpperCase() + str.substr(1);
 }
